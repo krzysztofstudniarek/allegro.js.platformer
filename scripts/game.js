@@ -7,6 +7,10 @@ var hero;
 var goingLeft=false;
 var goingRight=false;
 
+var fr = 0;
+var lastTime = time();
+var fps = 60;
+
 function main()
 {
     enable_debug('debug');
@@ -15,12 +19,23 @@ function main()
 	
 	ready(function(){
         loop(function(){
+			
             clear_to_color(canvas,makecol(255,255,255));
 			dispose();
             update();
 			controls();
 			events();
             draw();
+			
+			
+			fr ++;
+			if(time()-lastTime >= 1000){
+				fps = fr;
+				lastTime = time();
+				fr = 0;
+			}
+			wipe_log();
+			log(fps);
 			
         },BPS_TO_TIMER(60));
     });

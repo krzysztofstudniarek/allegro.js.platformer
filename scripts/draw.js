@@ -6,10 +6,10 @@ function draw()
 		circlefill(canvas, value.x, value.y, 2, makecol(255,0,0));
 	});
 	
-	rectfill(canvas, hero.x, hero.y, hero.width, hero.height, makecol(113,113,113));
+	circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 	
 	var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
-	circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(113,113,133));
+	circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
 	
 	
 	platforms.forEach(function(value){
