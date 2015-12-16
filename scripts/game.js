@@ -1,6 +1,7 @@
 var width = 640, height=480;
 
 var platforms;
+var bullets;
 
 var hero;
 var goingLeft=false;
@@ -9,7 +10,15 @@ var goingRight=false;
 function draw()
 {   
 	
+	bullets.forEach(function(value){
+		circlefill(canvas, value.x, value.y, 2, makecol(255,0,0));
+	});
+	
 	rectfill(canvas, hero.x, hero.y, hero.width, hero.height, makecol(113,113,113));
+	
+	var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
+	circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(113,113,133));
+	
 	
 	platforms.forEach(function(value){
 		
@@ -30,6 +39,13 @@ function draw()
 
 function update()
 {	
+
+	bullets.forEach(function(value){
+		
+		value.x += value.vx;
+		value.y += value.vy;
+		
+	});
 
 	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
@@ -63,6 +79,14 @@ function update()
 					hero.vy = 0;
 				}
 			}
+			
+			bullets.forEach(function(bullet){
+				
+				if(bullet.x > value.x && bullet.x < value.x + value.width && bullet.y > value.y && bullet.y < value.y + value.height){
+					bullets.delete(bullet);
+				}
+				
+			});
 		});
 	
 
@@ -111,6 +135,17 @@ function controls ()
 	if(released[KEY_RIGHT]){
 		goingRight = false;
 	}
+	
+	if(mouse_pressed){
+		var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
+		bullets.add({
+			x : hero.x + hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), 
+			y : hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d),
+			vx : 10*((mouse_x-hero.x- hero.width/2)/d),
+			vy : 10*((mouse_y-hero.y- hero.height/2)/d)
+		});
+	}
+	
 }
 
 function events()
@@ -129,7 +164,6 @@ function main()
 	
 	ready(function(){
         loop(function(){
-			wipe_log();
             clear_to_color(canvas,makecol(255,255,255));
 			dispose();
             update();
@@ -155,41 +189,35 @@ function load_elements()
 	});
 	
 	platforms.add({
-		x: 220,
-		y: 140,
+		x: 100,
+		y: 310,
+		width: 200,
+		height: 20,
+		drawShades: true
+	});
+	platforms.add({
+		x: 340,
+		y: 310,
+		width: 200,
+		height: 20,
+		drawShades: true
+	});
+	platforms.add({
+		x: 340,
+		y: 150,
+		width: 200,
+		height: 20,
+		drawShades: true
+	});
+	platforms.add({
+		x: 100,
+		y: 150,
 		width: 200,
 		height: 20,
 		drawShades: true
 	});
 	
-	platforms.add({
-		x: 100,
-		y: 300,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 340,
-		y: 300,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 340,
-		y: 160,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 100,
-		y: 160,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
+	bullets = new Set();
 	
 	hero = {
 		x : 150,
