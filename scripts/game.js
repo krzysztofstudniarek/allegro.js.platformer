@@ -16,16 +16,14 @@ function draw()
 		rectfill(canvas, value.x, value.y, value.width, value.height, makecol(0,0,0));
 		
 		if(value.drawShades){
-			//if(hero.x< value.x || hero.x>(value.x+value.width) || hero.y<value.y || hero.y > value.y+value.height){
 				var x = sgn(value.x+value.width-hero.x), x1 = sgn(value.x-hero.x);
 				polygonfill(canvas, 4, [value.x, value.y, value.x+value.width, value.y+value.height, x*10000, ((value.y+value.height - hero.y)*(x*10000-hero.x))/(value.x+value.width-hero.x) + hero.y, x1*10000, ((value.y - hero.y)*(x1*10000-hero.x))/(value.x-hero.x) + hero.y ], makecol(0,0,0));
 				polygonfill(canvas, 4, [value.x, value.y+value.height, value.x+value.width, value.y, x*10000, ((value.y - hero.y)*(x*10000-hero.x))/(value.x+value.width-hero.x) + hero.y, x1*10000, ((value.y+value.height - hero.y)*(x1*10000-hero.x))/(value.x-hero.x) + hero.y ], makecol(0,0,0));
-			//}
 		}
 		
 	});
 	
-	//polygonfill(canvas,4,[220,230, 420, 230, 420, 250, 220, 250],makecol(0,0,0));
+
 	
 
 }
@@ -33,24 +31,40 @@ function draw()
 function update()
 {	
 
-	if(hero.platform == null){
+	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
 	}
 
-	if(hero.platform == null){
+		//Logical statements needs simplification
 		platforms.forEach(function(value){
-			if((hero.y < (value.y + value.height+1)) && (hero.y > value.y) && (hero.x + hero.width >= value.x) && (hero.x <= value.x + value.width)){
-				hero.y = value.y +  value.height + 2;
-				hero.vy = -hero.vy;
+			if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
+				
+				if(hero.x + hero.width >= value.x && hero.x + hero.width <= value.x + 5){
+					hero.x = value.x - hero.width - 1;
+					hero.vx = 0;
+				}
+				
+				if(hero.x <= value.x + value.width && hero.x >= value.x + value.width - 5){
+					hero.x = value.x +value.width + 1;
+					hero.vx = 0;
+				}
+				
 			}
 			
-			if(hero.y >= (value.y - hero.height) && hero.x + hero.width > value.x && hero.x < value.x + value.width && hero.y < value.y){
-				hero.platform = value;
-				hero.y = value.y - hero.height;
-				hero.vy = 0;
+			if(hero.platform == null){
+				if((hero.y < (value.y + value.height+1)) && (hero.y > value.y) && (hero.x + hero.width >= value.x) && (hero.x <= value.x + value.width)){
+					hero.y = value.y +  value.height + 2;
+					hero.vy = -hero.vy;
+				}
+				
+				if(hero.y >= (value.y - hero.height) && hero.x + hero.width > value.x && hero.x < value.x + value.width && hero.y < value.y){
+					hero.platform = value;
+					hero.y = value.y - hero.height;
+					hero.vy = 0;
+				}
 			}
 		});
-	}
+	
 
 	if(hero.vx > 0){
 		hero.vx -= 0.1;
@@ -67,6 +81,10 @@ function update()
 	
 	if(hero.platform != null && (hero.x + hero.width< hero.platform.x || hero.x > hero.platform.x + hero.platform.width)){
 		hero.platform = null;
+	}
+	
+	if(hero.y > 480){
+		hero.y = 0;
 	}
 }
 
@@ -111,12 +129,14 @@ function main()
 	
 	ready(function(){
         loop(function(){
+			wipe_log();
             clear_to_color(canvas,makecol(255,255,255));
 			dispose();
             update();
 			controls();
 			events();
             draw();
+			
         },BPS_TO_TIMER(60));
     });
     return 0;
@@ -133,6 +153,15 @@ function load_elements()
 		height: 20,
 		drawShades: true
 	});
+	
+	platforms.add({
+		x: 220,
+		y: 140,
+		width: 200,
+		height: 20,
+		drawShades: true
+	});
+	
 	platforms.add({
 		x: 100,
 		y: 300,
