@@ -1,7 +1,6 @@
 //Fucntion for drawing elements on canvas
 function draw()
 {   
-	
 	//draw all bullets
 	bullets.forEach(function(value){
 		circlefill(canvas, value.x, value.y, 2, makecol(255,0,0));
@@ -36,6 +35,4 @@ function draw()
 		}
 		
 	});
-	
-
 }
