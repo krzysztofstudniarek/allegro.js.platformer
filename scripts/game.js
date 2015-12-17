@@ -1,6 +1,8 @@
 var width = 640, height=480;
 
 var platforms;
+var activePlatforms;
+
 var bullets;
 
 var hero;
@@ -21,7 +23,7 @@ function main()
 	
 	ready(function(){
         loop(function(){
-			
+			wipe_log();
             clear_to_color(canvas,makecol(255,255,255));
 			dispose();
             update();
@@ -30,13 +32,13 @@ function main()
             draw();
 			
 			
+			
 			fr ++;
 			if(time()-lastTime >= 1000){
 				fps = fr;
 				lastTime = time();
 				fr = 0;
 			}
-			wipe_log();
 			log(fps);
 			
         },BPS_TO_TIMER(60));
@@ -48,43 +50,45 @@ END_OF_MAIN();
 function load_elements()
 {
 	platforms = new Set();
-	platforms.add({
-		x: 460,
-		y: 230,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	
-	platforms.add({
-		x: 320,
-		y: 310,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 560,
-		y: 310,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 560,
-		y: 150,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	platforms.add({
-		x: 320,
-		y: 150,
-		width: 200,
-		height: 20,
-		drawShades: true
-	});
-	
+	activePlatforms = new Set();
+	for(var i = 0; i<10000; i++){
+		platforms.add({
+			x: 460 + i*width/2,
+			y: 230,
+			width: 200,
+			height: 20,
+			drawShades: true
+		});
+		
+		platforms.add({
+			x: 320 + i*width/2,
+			y: 310,
+			width: 200,
+			height: 20,
+			drawShades: true
+		});
+		platforms.add({
+			x: 560 + i*width/2,
+			y: 310,
+			width: 200,
+			height: 20,
+			drawShades: true
+		});
+		platforms.add({
+			x: 560 + i*width/2,
+			y: 150,
+			width: 200,
+			height: 20,
+			drawShades: true
+		});
+		platforms.add({
+			x: 320 + i*width/2,
+			y: 150,
+			width: 200,
+			height: 20,
+			drawShades: true
+		});
+	}
 	bullets = new Set();
 	
 	hero = {

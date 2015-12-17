@@ -12,7 +12,7 @@ function update()
 	}
 
 		//Logical statements needs simplification
-		platforms.forEach(function(value){
+		activePlatforms.forEach(function(value){
 			if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
 				
 				if(hero.x + hero.width >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + 5){

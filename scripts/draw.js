@@ -12,7 +12,7 @@ function draw()
 	circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
 	
 	
-	platforms.forEach(function(value){
+	activePlatforms.forEach(function(value){
 		
 		rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
 		
