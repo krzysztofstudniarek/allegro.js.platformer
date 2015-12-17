@@ -12,5 +12,12 @@ function dispose ()
 		}
 		
 	});
+	
+	//deleting bullets when out of canvas
+	bullets.forEach(function(value){
+		if((value.x + width/2 + 50) < hero.x || (value.x - translatedX - width/2 - 50> hero.x)){
+			bullets.delete(value);
+		}
+	});
 
 }
