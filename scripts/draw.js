@@ -1,4 +1,4 @@
-
+//Fucntion for drawing 
 function draw()
 {   
 	
