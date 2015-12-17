@@ -14,6 +14,14 @@ function draw()
 	var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
 	circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
 	
+	activeEnemies.forEach(function(enemy){	
+		
+		var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
+		circlefill(canvas, enemy.x - translatedX + enemy.radius/2 - 15*((enemy.x+enemy.radius/2 - translatedX -hero.x-hero.width/2)/d), enemy.y + enemy.radius/2 - 15*((enemy.y+enemy.radius/2-hero.y- hero.height/2)/d), 4, makecol(255,0,0));
+	
+		circlefill(canvas, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2, enemy.radius/2, makecol(255,0,0));
+	});
+	
 	//draw all platforms
 	activePlatforms.forEach(function(value){
 		
@@ -28,4 +36,6 @@ function draw()
 		}
 		
 	});
+	
+
 }
