@@ -57,6 +57,7 @@ function update()
 		});
 	});
 		
+	//kill enemy when shot; bullet is removed when enemy is hit	
 	bullets.forEach(function(bullet){
 		activeEnemies.forEach(function(enemy){
 			if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
