@@ -135,7 +135,8 @@ function load_elements()
 		enemies.add({
 			x: 560 + i*width/2,
 			y: 215,
-			radius: 15
+			radius: 15,
+			lastShotTime: time()
 		});
 	}
 	
