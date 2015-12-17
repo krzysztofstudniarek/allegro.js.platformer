@@ -11,6 +11,8 @@ var fr = 0;
 var lastTime = time();
 var fps = 60;
 
+var translatedX=0;
+
 function main()
 {
     enable_debug('debug');
@@ -47,7 +49,7 @@ function load_elements()
 {
 	platforms = new Set();
 	platforms.add({
-		x: 220,
+		x: 460,
 		y: 230,
 		width: 200,
 		height: 20,
@@ -55,28 +57,28 @@ function load_elements()
 	});
 	
 	platforms.add({
-		x: 100,
+		x: 320,
 		y: 310,
 		width: 200,
 		height: 20,
 		drawShades: true
 	});
 	platforms.add({
-		x: 340,
+		x: 560,
 		y: 310,
 		width: 200,
 		height: 20,
 		drawShades: true
 	});
 	platforms.add({
-		x: 340,
+		x: 560,
 		y: 150,
 		width: 200,
 		height: 20,
 		drawShades: true
 	});
 	platforms.add({
-		x: 100,
+		x: 320,
 		y: 150,
 		width: 200,
 		height: 20,
@@ -86,7 +88,7 @@ function load_elements()
 	bullets = new Set();
 	
 	hero = {
-		x : 150,
+		x : width/2,
 		y : 100,
 		vx : 0,
 		vy : 0,
