@@ -56,15 +56,29 @@ function update()
 			
 		});
 	});
-		
-	//kill enemy when shot; bullet is removed when enemy is hit	
-	bullets.forEach(function(bullet){
-		activeEnemies.forEach(function(enemy){
+	
+	
+	activeEnemies.forEach(function(enemy){
+		bullets.forEach(function(bullet){
 			if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
 				bullets.delete(bullet);
 				enemies.delete(enemy);
 			}
 		});
+		
+		var clearToShot = true;
+		
+		log(time());
+		if((time()%20) == 0){
+			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
+			bullets.add({
+				x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
+				y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
+				vx : -10*((enemy.x + enemy.radius/2 - translatedX-hero.x- hero.width/2)/d),
+				vy : -10*((enemy.y + enemy.radius/2 - hero.y - hero.height/2)/d)
+			});
+		}
+		
 	});
 	
 	//side scrolling behaviour; In fact hero is not moving horizontally;
