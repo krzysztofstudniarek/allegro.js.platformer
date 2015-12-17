@@ -65,18 +65,19 @@ function update()
 				enemies.delete(enemy);
 			}
 		});
-		
-		var clearToShot = true;
-		
-		log(time());
-		if((time()%20) == 0){
+
+		log((time() - enemy.lastShotTime ));
+		if((time() - enemy.lastShotTime) >= 100){
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
-			bullets.add({
-				x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
-				y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
-				vx : -10*((enemy.x + enemy.radius/2 - translatedX-hero.x- hero.width/2)/d),
-				vy : -10*((enemy.y + enemy.radius/2 - hero.y - hero.height/2)/d)
-			});
+			if(d < 150){
+				bullets.add({
+					x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
+					y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
+					vx : -10*((enemy.x + enemy.radius/2 - translatedX-hero.x- hero.width/2)/d),
+					vy : -10*((enemy.y + enemy.radius/2 - hero.y - hero.height/2)/d)
+				});
+				enemy.lastShotTime = time();
+			}
 		}
 		
 	});
@@ -99,4 +100,5 @@ function update()
 	if(hero.y > 480){
 		hero.y = 0;
 	}
+	
 }
