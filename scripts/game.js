@@ -16,6 +16,9 @@ var platforms;
 var activePlatforms; 
 //Set of bullets on the screen
 var bullets; 
+//Set of enemies
+var enemies;
+var activeEnemies;
 
 /*
 	Hero structure; x,y - hero position; width,height - hero size; vx,vy - hero speed; platform - platform that hero is currently standing on;
@@ -43,7 +46,7 @@ var lastTime = time();
 var fps = 60;
 
 //Side scroller translation variable
-var translatedX=0;
+var translatedX=15;
 
 function main()
 {
@@ -84,6 +87,10 @@ function load_elements()
 {
 	platforms = new Set();
 	activePlatforms = new Set();
+	
+	enemies = new Set();
+	activeEnemies = new Set();
+	
 	for(var i = 0; i<10000; i++){
 		platforms.add({
 			x: 460 + i*width/2,
@@ -100,6 +107,7 @@ function load_elements()
 			height: 20,
 			drawShades: true
 		});
+		
 		platforms.add({
 			x: 560 + i*width/2,
 			y: 310,
@@ -107,6 +115,7 @@ function load_elements()
 			height: 20,
 			drawShades: true
 		});
+		
 		platforms.add({
 			x: 560 + i*width/2,
 			y: 150,
@@ -114,6 +123,7 @@ function load_elements()
 			height: 20,
 			drawShades: true
 		});
+		
 		platforms.add({
 			x: 320 + i*width/2,
 			y: 150,
@@ -121,7 +131,16 @@ function load_elements()
 			height: 20,
 			drawShades: true
 		});
+		
+		enemies.add({
+			x: 560 + i*width/2,
+			y: 215,
+			radius: 15
+		});
 	}
+	
+	
+	
 	bullets = new Set();
 	
 	hero = {
