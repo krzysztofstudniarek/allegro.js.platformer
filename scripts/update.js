@@ -1,5 +1,7 @@
+//function for updating the single frame objects
 function update()
 {	
+	//update bullets positions, regardles to their velocity
 	bullets.forEach(function(value){
 		
 		value.x += value.vx;
@@ -7,12 +9,16 @@ function update()
 		
 	});
 
+	//if hero is currently not on platform make gravity bring him down
 	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
 	}
 
-		//Logical statements needs simplification
+		
 		activePlatforms.forEach(function(value){
+			//Hero-Platforms collision detection 
+			//TO-DO Simplify
+			//collision in horizontal movement
 			if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
 				
 				if(hero.x + hero.width >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + 5){
@@ -27,6 +33,7 @@ function update()
 				
 			}
 			
+			//collision in vartical movement
 			if(hero.platform == null){
 				if((hero.y < (value.y + value.height+1)) && (hero.y > value.y) && (hero.x + hero.width >= value.x - translatedX) && (hero.x <= value.x - translatedX + value.width)){
 					hero.y = value.y +  value.height + 2;
@@ -40,6 +47,7 @@ function update()
 				}
 			}
 			
+			//bullets Platform collision detection
 			bullets.forEach(function(bullet){
 				
 				if(bullet.x > value.x - translatedX && bullet.x < value.x - translatedX + value.width && bullet.y > value.y && bullet.y < value.y + value.height){
@@ -48,27 +56,22 @@ function update()
 				
 			});
 		});
-		
-	if(hero.vx > 0){
-		hero.vx -= 0.1;
-	}else if(hero.vx < 0 && !pressed[KEY_LEFT]){
-		hero.vx += 0.1;
-	} 
 	
-	if(abs(hero.vx)<0.1){
-		hero.vx = 0;
-	}
-	
+	//side scrolling behaviour; In fact hero is not moving horizontally;
+	//when if velocity changes the whole world is moving except hero :D.
 	hero.y += hero.vy;
 	if(translatedX >= 0){
 		translatedX += hero.vx;
 	}else{
 		translatedX = 0;
 	}
+	
+	//falling form the platform behaviour
 	if(hero.platform != null && (hero.x + hero.width< hero.platform.x- translatedX  || hero.x > hero.platform.x- translatedX  + hero.platform.width)){
 		hero.platform = null;
 	}
 	
+	//If hero falls out of the canvas by bottom edge it falls from the top again.
 	if(hero.y > 480){
 		hero.y = 0;
 	}

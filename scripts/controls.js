@@ -30,6 +30,16 @@ function controls ()
 		goingRight = false;
 	}
 	
+	//sliding after key released	
+	if(hero.vx > 0){
+		hero.vx -= 0.1;
+	}else if(hero.vx < 0 && !pressed[KEY_LEFT] && !pressed[KEY_A]){
+		hero.vx += 0.1;
+	} 
+	if(abs(hero.vx)<0.1){
+		hero.vx = 0;
+	}
+	
 	//shoot on mouse LPM press
 	if(mouse_pressed){
 		var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
