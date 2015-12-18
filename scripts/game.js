@@ -92,15 +92,23 @@ function load_elements()
 	activeEnemies = new Set();
 	
 	arr = document.getElementsByTagName("lvl")[0].getElementsByTagName("platforms")[0].getElementsByTagName("platform");
-	console.log(arr);
 	for(var i =0; i < arr.length; i++){
-		console.log("ADDED");
 		platforms.add({
 				x: parseInt(arr[i].getAttribute("x")),
 				y: parseInt(arr[i].getAttribute("y")),
 				width: parseInt(arr[i].getAttribute("width")),
 				height: parseInt(arr[i].getAttribute("height")),
 				drawShades: arr[i].getAttribute("drawShades") == "true"
+		});
+	}
+	
+	arr = document.getElementsByTagName("lvl")[0].getElementsByTagName("enemies")[0].getElementsByTagName("enemy");
+	for(var i =0; i < arr.length; i++){
+		enemies.add({
+			x: parseInt(arr[i].getAttribute("x")),
+			y: parseInt(arr[i].getAttribute("y")),
+			radius: parseInt(arr[i].getAttribute("radius")),
+			lastShotTime: time()
 		});
 	}
 
