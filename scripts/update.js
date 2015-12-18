@@ -7,8 +7,15 @@ function update()
 		value.x += value.vx;
 		value.y += value.vy;
 		
+		if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2){
+				hero.hp -= 10;
+				bullets.delete(value);
+		}
+		
 	});
-
+	
+	log(hero.hp);
+	
 	//if hero is currently not on platform make gravity bring him down
 	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
@@ -22,13 +29,11 @@ function update()
 		if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
 			
 			if(hero.x + hero.width >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + 5){
-				hero.x = value.x - translatedX - hero.width - 1;
-				hero.vx = 0;
+				hero.vx = -hero.vx;
 			}
 			
 			if(hero.x <= value.x - translatedX + value.width && hero.x >= value.x - translatedX + value.width - 5){
-				hero.x = value.x - translatedX +value.width + 1;
-				hero.vx = 0;
+				hero.vx = -hero.vx;
 			}
 			
 		}
@@ -56,27 +61,44 @@ function update()
 			
 		});
 	});
-		
-	//kill enemy when shot; bullet is removed when enemy is hit	
-	bullets.forEach(function(bullet){
-		activeEnemies.forEach(function(enemy){
+	
+	
+	activeEnemies.forEach(function(enemy){
+		bullets.forEach(function(bullet){
 			if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
 				bullets.delete(bullet);
 				enemies.delete(enemy);
 			}
 		});
+
+		if((time() - enemy.lastShotTime) >= 200 & frand()<=0.5){
+			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
+			if(d < 150 ){
+				bullets.add({
+					x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
+					y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
+					vx : -10*((enemy.x + enemy.radius/2 - translatedX-hero.x- hero.width/2)/d),
+					vy : -10*((enemy.y + enemy.radius/2 - hero.y - hero.height/2)/d)
+				});
+				enemy.lastShotTime = time();
+			}
+		}
+		
 	});
 	
 	//side scrolling behaviour; In fact hero is not moving horizontally;
 	//when if velocity changes the whole world is moving except hero :D.
 	hero.y += hero.vy;
+	
 	if(translatedX >= 0){
 		translatedX += hero.vx;
 	}else{
 		translatedX = 0;
 	}
 	
-	//falling form the platform behaviour
+	log(hero.x + ":"+width/2);
+	
+	//falling form the platform behaviourdddd
 	if(hero.platform != null && (hero.x + hero.width< hero.platform.x- translatedX  || hero.x > hero.platform.x- translatedX  + hero.platform.width)){
 		hero.platform = null;
 	}
@@ -85,4 +107,5 @@ function update()
 	if(hero.y > 480){
 		hero.y = 0;
 	}
+	
 }
