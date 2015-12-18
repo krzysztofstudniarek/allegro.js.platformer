@@ -38,14 +38,15 @@ function update()
 			
 		}
 		
-		//collision in vartical movement
+		
 		if(hero.platform == null){
-			if((hero.y < (value.y + value.height+1)) && (hero.y > value.y) && (hero.x + hero.width >= value.x - translatedX) && (hero.x <= value.x - translatedX + value.width)){
+			//collision in vartical movement
+			if((hero.y < (value.y + value.height+1)) && (hero.y > value.y) && (hero.x + hero.width >= value.x - translatedX + 5) && (hero.x <= value.x - translatedX + value.width - 5)){
 				hero.y = value.y +  value.height + 2;
 				hero.vy = -hero.vy;
 			}
 			
-			if(hero.y >= (value.y - hero.height) && hero.x + hero.width > value.x - translatedX && hero.x < value.x - translatedX + value.width && hero.y < value.y){
+			if(hero.y >= (value.y - hero.height) && hero.x + hero.width > value.x - translatedX +5 && hero.x < value.x - translatedX + value.width -5 && hero.y < value.y){
 				hero.platform = value;
 				hero.y = value.y - hero.height;
 				hero.vy = 0;
