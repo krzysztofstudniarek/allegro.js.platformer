@@ -91,12 +91,9 @@ function update()
 	//when if velocity changes the whole world is moving except hero :D.
 	hero.y += hero.vy;
 	
-	if(translatedX >= 0){
+
 		translatedX += hero.vx;
-	}else{
-		translatedX = 0;
-	}
-	
+
 	log(hero.x + ":"+width/2);
 	
 	//falling form the platform behaviourdddd

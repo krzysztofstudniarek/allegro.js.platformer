@@ -22,7 +22,7 @@ function dispose ()
 		
 	});
 	
-	//deleting bullets when out of canvas
+	//deleting bullets when out of canvaads
 	bullets.forEach(function(value){
 		if((value.x + width/2 + 50) < hero.x || (value.x - translatedX - width/2 - 50> hero.x)){
 			bullets.delete(value);

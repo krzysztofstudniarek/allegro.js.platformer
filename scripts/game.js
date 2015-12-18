@@ -46,7 +46,7 @@ var lastTime = time();
 var fps = 60;
 
 //Side scroller translation variable
-var translatedX=100;
+var translatedX=250;
 
 function main()
 {
