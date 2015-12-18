@@ -91,62 +91,26 @@ function load_elements()
 	enemies = new Set();
 	activeEnemies = new Set();
 	
-	for(var i = 0; i<10000; i++){
+	arr = document.getElementsByTagName("lvl")[0].getElementsByTagName("platforms")[0].getElementsByTagName("platform");
+	console.log(arr);
+	for(var i =0; i < arr.length; i++){
+		console.log("ADDED");
 		platforms.add({
-			x: 460 + i*width/2,
-			y: 230,
-			width: 200,
-			height: 20,
-			drawShades: true
-		});
-		
-		platforms.add({
-			x: 320 + i*width/2,
-			y: 310,
-			width: 200,
-			height: 20,
-			drawShades: true
-		});
-		
-		platforms.add({
-			x: 560 + i*width/2,
-			y: 310,
-			width: 200,
-			height: 20,
-			drawShades: true
-		});
-		
-		platforms.add({
-			x: 560 + i*width/2,
-			y: 150,
-			width: 200,
-			height: 20,
-			drawShades: true
-		});
-		
-		platforms.add({
-			x: 320 + i*width/2,
-			y: 150,
-			width: 200,
-			height: 20,
-			drawShades: true
-		});
-		
-		enemies.add({
-			x: 560 + i*width/2,
-			y: 215,
-			radius: 15,
-			lastShotTime: time()
+				x: parseInt(arr[i].getAttribute("x")),
+				y: parseInt(arr[i].getAttribute("y")),
+				width: parseInt(arr[i].getAttribute("width")),
+				height: parseInt(arr[i].getAttribute("height")),
+				drawShades: true
 		});
 	}
-	
+
 	
 	
 	bullets = new Set();
 	
 	hero = {
 		x : width/2,
-		y : 100,
+		y : 200,
 		vx : 0,
 		vy : 0,
 		width : 15,
