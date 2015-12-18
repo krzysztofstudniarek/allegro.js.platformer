@@ -74,7 +74,7 @@ function update()
 
 		if((time() - enemy.lastShotTime) >= 200 & frand()<=0.5){
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
-			if(d < 150 ){
+			if(d < 200 ){
 				bullets.add({
 					x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
 					y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
