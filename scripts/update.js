@@ -7,8 +7,15 @@ function update()
 		value.x += value.vx;
 		value.y += value.vy;
 		
+		if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2){
+				hero.hp -= 10;
+				bullets.delete(value);
+		}
+		
 	});
-
+	
+	log(hero.hp);
+	
 	//if hero is currently not on platform make gravity bring him down
 	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
@@ -66,10 +73,9 @@ function update()
 			}
 		});
 
-		log((time() - enemy.lastShotTime ));
-		if((time() - enemy.lastShotTime) >= 100){
+		if((time() - enemy.lastShotTime) >= 200 & frand()<=0.5){
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
-			if(d < 150){
+			if(d < 150 ){
 				bullets.add({
 					x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
 					y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),

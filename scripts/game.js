@@ -151,6 +151,7 @@ function load_elements()
 		vy : 0,
 		width : 15,
 		height : 15,
+		hp: 100,
 		platform: null
 	};
 }

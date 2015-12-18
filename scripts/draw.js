@@ -35,4 +35,6 @@ function draw()
 		}
 		
 	});
+	
+	rectfill(canvas, 0, height-5, width*(hero.hp/100), 5, makecol(255*(1 - (hero.hp/100)),255*(hero.hp/100),0));
 }
