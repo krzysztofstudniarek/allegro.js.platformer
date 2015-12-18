@@ -46,7 +46,7 @@ var lastTime = time();
 var fps = 60;
 
 //Side scroller translation variable
-var translatedX=15;
+var translatedX=100;
 
 function main()
 {
@@ -60,8 +60,8 @@ function main()
 			wipe_log(); //clear log
             clear_to_color(canvas,makecol(255,255,255)); //clear display
 			dispose(); //dispose all inactive elements (dispose.js)
-            update(); //update all elements (update.js)
 			controls(); //game controls (controls.js)
+            update(); //update all elements (update.js)
 			events(); //events handling, like endgame, start game (events.js)
             draw(); //drawing all scene elements (draw.js)
 			
@@ -100,7 +100,7 @@ function load_elements()
 				y: parseInt(arr[i].getAttribute("y")),
 				width: parseInt(arr[i].getAttribute("width")),
 				height: parseInt(arr[i].getAttribute("height")),
-				drawShades: true
+				drawShades: arr[i].getAttribute("drawShades") == "true"
 		});
 	}
 
@@ -110,7 +110,7 @@ function load_elements()
 	
 	hero = {
 		x : width/2,
-		y : 200,
+		y : 150,
 		vx : 0,
 		vy : 0,
 		width : 15,

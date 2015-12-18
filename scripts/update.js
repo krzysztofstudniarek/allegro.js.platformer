@@ -29,13 +29,11 @@ function update()
 		if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
 			
 			if(hero.x + hero.width >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + 5){
-				hero.x = value.x - translatedX - hero.width - 1;
-				hero.vx = 0;
+				hero.vx = -hero.vx;
 			}
 			
 			if(hero.x <= value.x - translatedX + value.width && hero.x >= value.x - translatedX + value.width - 5){
-				hero.x = value.x - translatedX +value.width + 1;
-				hero.vx = 0;
+				hero.vx = -hero.vx;
 			}
 			
 		}
@@ -91,13 +89,16 @@ function update()
 	//side scrolling behaviour; In fact hero is not moving horizontally;
 	//when if velocity changes the whole world is moving except hero :D.
 	hero.y += hero.vy;
+	
 	if(translatedX >= 0){
 		translatedX += hero.vx;
 	}else{
 		translatedX = 0;
 	}
 	
-	//falling form the platform behaviour
+	log(hero.x + ":"+width/2);
+	
+	//falling form the platform behaviourdddd
 	if(hero.platform != null && (hero.x + hero.width< hero.platform.x- translatedX  || hero.x > hero.platform.x- translatedX  + hero.platform.width)){
 		hero.platform = null;
 	}
