@@ -48,12 +48,14 @@ var fps = 60;
 //Side scroller translation variable
 var translatedX=250;
 
+var inGame = false;
+
 function main()
 {
 	//Initiation of all elements
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
-	load_elements();
+	//load_elements();
 	
 	ready(function(){
         loop(function(){
@@ -85,6 +87,7 @@ END_OF_MAIN();
 //function loads elements on start of the game.
 function load_elements()
 {
+	translatedX = 250;
 	platforms = new Set();
 	activePlatforms = new Set();
 	

@@ -1,8 +1,11 @@
 //Funcrtion for in games events handling
 function events()
 {	
-	if(hero.hp <= 0){
-		hero.hp = 100;
+	if(inGame){
+		if(hero.hp <= 0){
+			inGame = !inGame;
+			hero.hp = 100;
+		}	
 	}
 
 }
