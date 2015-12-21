@@ -16,7 +16,7 @@ function update()
 	
 	log(hero.hp);
 	
-	//if hero is currently not on platform make gravity bring him down
+	//if hero is currently not on platform make gravity brings him down
 	if(hero.platform == null && hero.vy <= 3){
 			hero.vy += 0.2;
 	}
@@ -28,12 +28,15 @@ function update()
 		//collision in horizontal movement
 		if(((hero.y <= (value.y) && hero.y+hero.height > value.y) || (hero.y + hero.height >= (value.y + value.height) && hero.y > value.y && hero.y<value.y + value.height) || (hero.y >= value.y) && (hero.y+hero.width <= value.y + value.height))){
 			
-			if(hero.x + hero.width >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + 5){
-				hero.vx = -hero.vx;
+			if(hero.x + hero.width + 2 >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + hero.width){
+				hero.vx = 0;
+				translatedX -= 2;
+				
 			}
 			
-			if(hero.x <= value.x - translatedX + value.width && hero.x >= value.x - translatedX + value.width - 5){
-				hero.vx = -hero.vx;
+			if(hero.x - 2 <= value.x - translatedX + value.width && hero.x >= value.x - translatedX + value.width - hero.width){
+				hero.vx = 0;
+				translatedX += 2;
 			}
 			
 		}
