@@ -1,51 +1,17 @@
 //function for updating the single frame objects
 function update()
 {	
-<<<<<<< HEAD
-	//update bullets positions, regardles to their velocity
-	bullets.forEach(function(value){
-		
-		value.x += value.vx;
-		value.y += value.vy;
-		
-		if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2){
-				hero.hp -= 10;
-				bullets.delete(value);
-		}
-		
-	});
-	
-	log(hero.hp);
-	
-	//if hero is currently not on platform make gravity brings him down
-	if(hero.platform == null && hero.vy <= 3){
-			hero.vy += 0.2;
-	}
-=======
->>>>>>> master
 
 	if(inGame){
 		//update bullets positions, regardles to their velocity
 		bullets.forEach(function(value){
 			
-<<<<<<< HEAD
-			if(hero.x + hero.width + 2 >= value.x - translatedX && hero.x + hero.width <= value.x - translatedX + hero.width){
-				hero.vx = 0;
-				translatedX -= 2;
-				
-			}
-			
-			if(hero.x - 2 <= value.x - translatedX + value.width && hero.x >= value.x - translatedX + value.width - hero.width){
-				hero.vx = 0;
-				translatedX += 2;
-=======
 			value.x += value.vx;
 			value.y += value.vy;
 			
 			if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2){
 					hero.hp -= 10;
 					bullets.delete(value);
->>>>>>> master
 			}
 			
 		});
