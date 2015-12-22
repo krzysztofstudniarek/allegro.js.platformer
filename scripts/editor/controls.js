@@ -19,6 +19,18 @@ function controls()
 		if(released[KEY_RIGHT] || released[KEY_D]){
 			goingRight = false;
 		}
+		
+		if(selectedPlatform != undefined && pressed[KEY_R]){
+			
+			platforms.delete(selectedPlatform);
+			selectedPlatform = undefined;
+		}
+		
+		if(selectedEnemy != undefined && pressed[KEY_R]){
+			
+			enemies.delete(selectedEnemy);
+			selectedEnemy = undefined;
+		}
 	
 }
 	

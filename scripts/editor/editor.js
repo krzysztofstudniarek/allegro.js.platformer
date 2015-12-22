@@ -14,6 +14,9 @@ var fps = 60;
 var translatedX=250;
 
 var selectedPlatform;
+var selectedEnemy;
+
+var newX, newY;
 
 function main()
 {
