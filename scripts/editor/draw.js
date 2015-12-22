@@ -20,6 +20,12 @@ function draw()
 		//draw all platforms
 		platforms.forEach(function(value){
 			
+			if(value.drawShades && mouse_b == 4){
+						var x = sgn(value.x - translatedX+value.width-mouse_x), x1 = sgn(value.x - translatedX-mouse_x);
+						polygonfill(canvas, 4, [value.x - translatedX, value.y, value.x - translatedX+value.width, value.y+value.height, x*10000, ((value.y+value.height - mouse_y)*(x*10000-mouse_x))/(value.x - translatedX+value.width-mouse_x) + mouse_y, x1*10000, ((value.y - mouse_y)*(x1*10000-mouse_x))/(value.x - translatedX-mouse_x) + mouse_y ], makecol(0,0,0));
+						polygonfill(canvas, 4, [value.x - translatedX, value.y+value.height, value.x - translatedX+value.width, value.y, x*10000, ((value.y - mouse_y)*(x*10000-mouse_x))/(value.x - translatedX+value.width-mouse_x) + mouse_y, x1*10000, ((value.y+value.height - mouse_y)*(x1*10000-mouse_x))/(value.x - translatedX-mouse_x) + mouse_y ], makecol(0,0,0));
+			}	
+			
 			
 			if(value == selectedPlatform){
 				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,255,0));
@@ -28,17 +34,12 @@ function draw()
 				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
 			}
 			
-			if(value.drawShades && mouse_b == 4){
-						var x = sgn(value.x - translatedX+value.width-mouse_x), x1 = sgn(value.x - translatedX-mouse_x);
-						polygonfill(canvas, 4, [value.x - translatedX, value.y, value.x - translatedX+value.width, value.y+value.height, x*10000, ((value.y+value.height - mouse_y)*(x*10000-mouse_x))/(value.x - translatedX+value.width-mouse_x) + mouse_y, x1*10000, ((value.y - mouse_y)*(x1*10000-mouse_x))/(value.x - translatedX-mouse_x) + mouse_y ], makecol(0,0,0));
-						polygonfill(canvas, 4, [value.x - translatedX, value.y+value.height, value.x - translatedX+value.width, value.y, x*10000, ((value.y - mouse_y)*(x*10000-mouse_x))/(value.x - translatedX+value.width-mouse_x) + mouse_y, x1*10000, ((value.y+value.height - mouse_y)*(x1*10000-mouse_x))/(value.x - translatedX-mouse_x) + mouse_y ], makecol(0,0,0));
-				}	
 			
 
 			
 		});
 		
-		if(selectedPlatform != undefined){
-			rectfill(canvas, selectedPlatform.x - translatedX, selectedPlatform.y, selectedPlatform.width, selectedPlatform.height, makecol(0,255,0));
+		if(newX != undefined && newY != undefined){
+			rectfill(canvas, newX, newY, mouse_x - newX, mouse_y-newY, makecol(0,0,0));
 		}
 }
