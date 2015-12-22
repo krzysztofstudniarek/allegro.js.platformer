@@ -17,3 +17,12 @@
 	margin: 10px auto;
 	padding:10px; 
 }
+
+#input-container{
+	text-align:left; 
+	width:620px; 
+	height:460px; 
+	overflow: auto; 
+	margin: 10px auto;
+	padding:10px;
+}

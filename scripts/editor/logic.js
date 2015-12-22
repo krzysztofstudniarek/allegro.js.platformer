@@ -59,8 +59,51 @@ function logic(){
 			a.download = name + ".lvl";
 			a.click();
 		}
-		
-		
 	}
-	
 }
+
+function readLvlFromFile(evt) {
+//Retrieve the first (and only!) File from the FileList object
+	var f = evt.target.files[0]; 
+
+	if (f) {
+		var r = new FileReader();
+		r.onload = function(e) { 
+			var contents = e.target.result;
+			var parser = new DOMParser();
+			xmlDoc = parser.parseFromString(contents, "text/xml");
+			
+			translatedX = 250;
+			platforms = new Set();
+			enemies = new Set();
+			
+			arr = xmlDoc.getElementsByTagName("lvl")[0].getElementsByTagName("platforms")[0].getElementsByTagName("platform");
+			for(var i =0; i < arr.length; i++){
+				platforms.add({
+						x: parseInt(arr[i].getAttribute("x")),
+						y: parseInt(arr[i].getAttribute("y")),
+						width: parseInt(arr[i].getAttribute("width")),
+						height: parseInt(arr[i].getAttribute("height")),
+						drawShades: arr[i].getAttribute("drawShades") == "true"
+				});
+			}
+			
+			arr = xmlDoc.getElementsByTagName("lvl")[0].getElementsByTagName("enemies")[0].getElementsByTagName("enemy");
+			for(var i =0; i < arr.length; i++){
+				enemies.add({
+					x: parseInt(arr[i].getAttribute("x")),
+					y: parseInt(arr[i].getAttribute("y")),
+					radius: parseInt(arr[i].getAttribute("radius")),
+					lastShotTime: time()
+				});
+				console.log("loaded Enemy");
+			}
+			
+			console.log("LOADED NEW LEVEL");
+		}
+		r.readAsText(f);
+	} else { 
+		alert("Failed to load file");
+	}
+}
+
