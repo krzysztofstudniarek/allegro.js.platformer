@@ -25,6 +25,6 @@ function draw()
 		});
 		
 		if(selectedPlatform != undefined){
-			rectfill(canvas, selectedPlatform.x - translatedX, selectedPlatform.y, selectedPlatform.width, selectedPlatform.height, makecol(255,0,0));
+			rectfill(canvas, selectedPlatform.x - translatedX, selectedPlatform.y, selectedPlatform.width, selectedPlatform.height, makecol(0,255,0));
 		}
 }
