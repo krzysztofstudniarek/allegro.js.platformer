@@ -32,4 +32,35 @@ function logic(){
 		newY = undefined;
 	}
 	
+	if(pressed[KEY_S]){
+		var name = prompt("Please enter file name", "");
+		
+		if(name == ""){
+			alert("Filename could not be empty");
+		}else{	
+			var tx = "<lvl><platforms>";
+			
+			platforms.forEach(function(value){
+				tx += "<platform x='"+value.x+"' y='"+value.y+"' width='"+value.width+"' height='"+value.height+"' drawShades='true'></platform>"
+			});
+			
+			
+			tx += "</platforms><enemies>"
+			
+			enemies.forEach(function(value){
+				tx += "<enemy x='"+value.x+"' y='"+value.y+"' radius='"+value.radius+"'></enemy>"
+			});
+			
+			tx += "</enemies></lvl>"
+			
+			var a = document.createElement("a");
+			var file = new Blob([tx], {type: 'text/html'});
+			a.href = URL.createObjectURL(file);
+			a.download = name + ".lvl";
+			a.click();
+		}
+		
+		
+	}
+	
 }
