@@ -35,7 +35,7 @@ function logic(){
 	if(pressed[KEY_S]){
 		var name = prompt("Please enter file name", "");
 		
-		if(name == ""){
+		if(name == null || name == ""){
 			alert("Filename could not be empty");
 		}else{	
 			var tx = "<lvl><platforms>";
