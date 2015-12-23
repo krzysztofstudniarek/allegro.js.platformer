@@ -49,4 +49,6 @@ function editor_draw()
 		if(newX != undefined && newY != undefined){
 			rectfill(canvas, newX, newY, mouse_x - newX, mouse_y-newY, makecol(0,0,0));
 		}
+		
+		rectfill(canvas, width/2 - translatedX, 150, 25, 25, makecol(0,0,255));
 }

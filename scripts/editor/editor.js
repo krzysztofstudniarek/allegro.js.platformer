@@ -11,7 +11,7 @@ var fr = 0;
 var lastTime = time();
 var fps = 60;
 
-var translatedX=250;
+var translatedX=0;
 
 var selectedPlatform;
 var selectedEnemy;
@@ -21,7 +21,7 @@ var newX, newY;
 var gameMode = false;
 var inGame = true;
 var grid = false;
-
+  
 var hero;
 
 var bullets; 
@@ -60,7 +60,7 @@ function main()
 					hp: 100,
 					platform: null
 				};
-				translatedX = 250
+				translatedX = 0
 				gameMode = !gameMode;
 			}
 			
@@ -80,7 +80,7 @@ END_OF_MAIN();
 
 function load_elements()
 {
-	translatedX = 250;
+	translatedX = 0;
 	platforms = new Set();
 	enemies = new Set();
 	bullets = new Set();

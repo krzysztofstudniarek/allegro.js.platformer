@@ -35,5 +35,14 @@ function editor_controls()
 			enemies.delete(selectedEnemy);
 			selectedEnemy = undefined;
 		}
+		
+		if(pressed[KEY_SPACE]){
+			enemies.add({
+				x: mouse_x + translatedX,
+				y: mouse_y,
+				radius: 15,
+				lastShotTime: time()
+			});
+		}
 }
 	
