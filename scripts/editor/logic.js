@@ -14,28 +14,32 @@ function editor_logic(){
 	});
 	
 	if(mouse_pressed&1){
-		if(grid){
-			newX = mouse_x%40 <= 20 ? mouse_x - mouse_x%40 : mouse_x + 40 - mouse_x%40 ;
-			newY = mouse_y%40 <= 20 ? mouse_y - mouse_y%40 : mouse_y + 40 - mouse_y%40 ;
-		}else{
-			newX = mouse_x;
-			newY = mouse_y;
-		}
-
+		newX = mouse_x;
+		newY = mouse_y;
 	}
 
 	if(mouse_released&1){
 		if(grid){
-			var x = mouse_x%40 <= 20 ? mouse_x - mouse_x%40 : mouse_x + 40 - mouse_x%40;
+			
+			newX = (newX%40 <= 20 ? newX - newX%40 : newX + 40 - newX%40);
+			newY = newY%40 <= 20 ? newY - newY%40 : newY + 40 - newY%40 ;
+			
+			var x = (mouse_x%40 <= 20 ? mouse_x - mouse_x%40 : mouse_x + 40 - mouse_x%40);
 			var y = mouse_y%40 <= 20 ? mouse_y - mouse_y%40 : mouse_y + 40 - mouse_y%40;
 			
-			platforms.add({
-					x: (newX<x?newX:x) + translatedX,
-					y: newY<y?newY:y,
-					width: abs(newX - x),
-					height: abs(newY - y),
-					drawShades: true
-			});
+			var tx = (translatedX%40 <= 20 ? translatedX - translatedX%40 : translatedX + 40 - translatedX%40)
+			
+			if(abs(newX - x) > 0){
+				platforms.add({
+						x: (newX<x?newX:x)+tx,
+						y: newY<y?newY:y,
+						width: abs(newX - x),
+						height: abs(newY - y),
+						drawShades: true
+				});
+			}
+			
+			//console.log((newX<x?newX:x) + ":" + abs(newX - x) + ":" + translatedX);
 			
 			newX = undefined;
 			newY = undefined;
