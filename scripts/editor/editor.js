@@ -18,6 +18,13 @@ var selectedEnemy;
 
 var newX, newY;
 
+var gameMode = false;
+var inGame = true;
+
+var hero;
+
+var bullets; 
+
 function main()
 {
     enable_debug('debug');
@@ -26,12 +33,34 @@ function main()
 	
 	ready(function(){
         loop(function(){
-			wipe_log();
-            clear_to_color(canvas,makecol(255,255,255));
-			controls();
-			logic();
-			//events(); 
-            draw();
+			if(gameMode){
+				wipe_log(); //clear log
+				clear_to_color(canvas,makecol(255,255,255)); //clear display
+				dispose(); //dispose all inactive elements (dispose.js)
+				controls(); //game controls (controls.js)
+				update(true); //update all elements (update.js)
+				draw(); //drawing all scene elements (draw.js)
+			}else{
+				wipe_log();
+				clear_to_color(canvas,makecol(255,255,255));
+				editor_controls();
+				editor_logic();
+				editor_draw();
+			}
+
+			if(pressed[KEY_P]){
+				hero = {
+					x : width/2,
+					y : 150,
+					vx : 0,
+					vy : 0,
+					width : 15,
+					height : 15,
+					hp: 100,
+					platform: null
+				};
+				gameMode = !gameMode;
+			}
 			
 			fr ++; 
 			if(time()-lastTime >= 1000){
@@ -52,5 +81,5 @@ function load_elements()
 	translatedX = 250;
 	platforms = new Set();
 	enemies = new Set();
-
+	bullets = new Set();
 }

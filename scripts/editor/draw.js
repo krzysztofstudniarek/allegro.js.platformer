@@ -1,5 +1,5 @@
 //Fucntion for drawing elements on canvas
-function draw()
+function editor_draw()
 {   
 		enemies.forEach(function(enemy){	
 			

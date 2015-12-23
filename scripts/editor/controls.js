@@ -1,4 +1,4 @@
-function controls()
+function editor_controls()
 {
 		if(pressed[KEY_LEFT] || pressed[KEY_A] || goingLeft){
 			goingLeft = true;
