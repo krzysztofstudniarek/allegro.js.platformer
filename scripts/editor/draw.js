@@ -37,12 +37,13 @@ function editor_draw()
 		});
 		
 		if(grid){
-			for(var i = 0; i<=100000; i+= 40){
-				 line(canvas,i-translatedX,0,i-translatedX,height,makecol(125,125,125),1);
+			for(var i = 0; i<=width; i+= 40){
+				 line(canvas, i,0,i,height,makecol(125,125,125),1);
 			}
 			for(var i = 0; i<height; i+= 40){
 				line(canvas,0,i,width,i,makecol(125,125,125),1);
 			}
+			
 		}
 		
 		if(newX != undefined && newY != undefined){

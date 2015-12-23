@@ -14,22 +14,44 @@ function editor_logic(){
 	});
 	
 	if(mouse_pressed&1){
-		newX = mouse_x;
-		newY = mouse_y;
+		if(grid){
+			newX = mouse_x%40 <= 20 ? mouse_x - mouse_x%40 : mouse_x + 40 - mouse_x%40 ;
+			newY = mouse_y%40 <= 20 ? mouse_y - mouse_y%40 : mouse_y + 40 - mouse_y%40 ;
+		}else{
+			newX = mouse_x;
+			newY = mouse_y;
+		}
+
 	}
 
 	if(mouse_released&1){
-		
-		platforms.add({
-				x: (newX<mouse_x?newX:mouse_x) + translatedX,
-				y: newY<mouse_y?newY:mouse_y,
-				width: abs(newX - mouse_x),
-				height: abs(newY - mouse_y),
-				drawShades: true
-		});
-		
-		newX = undefined;
-		newY = undefined;
+		if(grid){
+			var x = mouse_x%40 <= 20 ? mouse_x - mouse_x%40 : mouse_x + 40 - mouse_x%40;
+			var y = mouse_y%40 <= 20 ? mouse_y - mouse_y%40 : mouse_y + 40 - mouse_y%40;
+			
+			platforms.add({
+					x: (newX<x?newX:x) + translatedX,
+					y: newY<y?newY:y,
+					width: abs(newX - x),
+					height: abs(newY - y),
+					drawShades: true
+			});
+			
+			newX = undefined;
+			newY = undefined;
+		}else{			
+			platforms.add({
+					x: (newX<mouse_x?newX:mouse_x) + translatedX,
+					y: newY<mouse_y?newY:mouse_y,
+					width: abs(newX - mouse_x),
+					height: abs(newY - mouse_y),
+					drawShades: true
+			});
+			
+			newX = undefined;
+			newY = undefined;
+		}
+
 	}
 	
 	if(pressed[KEY_S]){

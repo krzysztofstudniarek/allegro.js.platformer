@@ -35,6 +35,5 @@ function editor_controls()
 			enemies.delete(selectedEnemy);
 			selectedEnemy = undefined;
 		}
-	
 }
 	
