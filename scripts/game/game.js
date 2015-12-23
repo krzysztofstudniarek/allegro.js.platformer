@@ -20,6 +20,8 @@ var bullets;
 var enemies;
 var activeEnemies;
 
+var lvl = 0;
+
 /*
 	Hero structure; x,y - hero position; width,height - hero size; vx,vy - hero speed; platform - platform that hero is currently standing on;
 	Starting Stucture:
@@ -87,14 +89,23 @@ END_OF_MAIN();
 //function loads elements on start of the game.
 function load_elements()
 {
-	translatedX = 250;
+	translatedX = 0;
 	platforms = new Set();
 	activePlatforms = new Set();
 	
 	enemies = new Set();
 	activeEnemies = new Set();
+
+	levels = document.getElementsByTagName("lvl");
+	for(var i = 0; i< levels.length; i++){
+		if(parseInt(levels[i].getAttribute("num")) == lvl){
+			level = levels[i];
+			break;
+		}	
+	}
 	
-	arr = document.getElementsByTagName("lvl")[0].getElementsByTagName("platforms")[0].getElementsByTagName("platform");
+	arr = level.getElementsByTagName("platforms")[0].getElementsByTagName("platform");
+	
 	for(var i =0; i < arr.length; i++){
 		platforms.add({
 				x: parseInt(arr[i].getAttribute("x")),
@@ -105,7 +116,7 @@ function load_elements()
 		});
 	}
 	
-	arr = document.getElementsByTagName("lvl")[0].getElementsByTagName("enemies")[0].getElementsByTagName("enemy");
+	arr = level.getElementsByTagName("enemies")[0].getElementsByTagName("enemy");
 	for(var i =0; i < arr.length; i++){
 		enemies.add({
 			x: parseInt(arr[i].getAttribute("x")),
