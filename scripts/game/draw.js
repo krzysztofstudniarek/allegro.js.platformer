@@ -48,6 +48,12 @@ function draw()
 			mv += 20;
 			
 		});
+		if(enemies.size <= 0){
+			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,125));
+			textout_centre(canvas,font,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,20,makecol(0,0,0));
+			textout_centre(canvas,font,"press SPACE to continue",SCREEN_W/2,SCREEN_H/2+20,20,makecol(0,0,0));
+		}
+		
 		
 	}else{
 		var x = sgn(width/2+100-mouse_x), x1 = sgn(width/2-100 - mouse_x);
