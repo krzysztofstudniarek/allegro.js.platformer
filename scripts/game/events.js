@@ -5,7 +5,12 @@ function events()
 		if(hero.hp <= 0){
 			inGame = !inGame;
 			hero.hp = 100;
-		}	
+		}
+		
+		if(enemies.size == 0){
+			lvl++;
+			load_elements();
+		}
 	}
 
 }
