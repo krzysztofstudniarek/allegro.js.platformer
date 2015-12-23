@@ -8,8 +8,11 @@ function events()
 		}
 		
 		if(enemies.size == 0){
-			lvl++;
-			load_elements();
+			if(pressed[KEY_SPACE]){
+				lvl++;
+				load_elements();
+				console.log(lvl);
+			}
 		}
 	}
 
