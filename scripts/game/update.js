@@ -1,6 +1,7 @@
 //function for updating the single frame objects
-function update()
+function update(editor)
 {	
+	editor = editor !== 'undefined' ? editor : false;
 
 	if(inGame){
 		//update bullets positions, regardles to their velocity
@@ -9,7 +10,7 @@ function update()
 			value.x += value.vx;
 			value.y += value.vy;
 			
-			if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2){
+			if(distance(value.x, value.y, hero.x+hero.width/2, hero.y+hero.width/2) < hero.width/2 && !editor){
 					hero.hp -= 10;
 					bullets.delete(value);
 			}
@@ -68,12 +69,14 @@ function update()
 			});
 		});
 		
-		
 		activeEnemies.forEach(function(enemy){
+
 			bullets.forEach(function(bullet){
 				if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
-					bullets.delete(bullet);
-					enemies.delete(enemy);
+					bullets.delete(bullet);	
+					if(!editor){
+						enemies.delete(enemy);
+					}
 				}
 			});
 
