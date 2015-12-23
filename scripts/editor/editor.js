@@ -20,6 +20,7 @@ var newX, newY;
 
 var gameMode = false;
 var inGame = true;
+var grid = false;
 
 var hero;
 
@@ -59,6 +60,7 @@ function main()
 					hp: 100,
 					platform: null
 				};
+				translatedX = 250
 				gameMode = !gameMode;
 			}
 			

@@ -33,11 +33,17 @@ function editor_draw()
 				//draw platform body
 				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
 			}
-			
-			
 
-			
 		});
+		
+		if(grid){
+			for(var i = 0; i<=100000; i+= 40){
+				 line(canvas,i-translatedX,0,i-translatedX,height,makecol(125,125,125),1);
+			}
+			for(var i = 0; i<height; i+= 40){
+				line(canvas,0,i,width,i,makecol(125,125,125),1);
+			}
+		}
 		
 		if(newX != undefined && newY != undefined){
 			rectfill(canvas, newX, newY, mouse_x - newX, mouse_y-newY, makecol(0,0,0));

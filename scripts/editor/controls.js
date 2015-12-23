@@ -9,6 +9,10 @@ function editor_controls()
 			goingLeft = false;
 		}
 		
+		if(pressed[KEY_G]){
+			grid = !grid;
+		}
+		
 		//moving right
 		if(pressed[KEY_RIGHT] || pressed[KEY_D] || goingRight){
 			goingRight = true;
