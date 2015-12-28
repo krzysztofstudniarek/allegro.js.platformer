@@ -42,7 +42,7 @@ function controls ()
 		}
 		
 		//shoot on mouse LPM press
-		if(mouse_pressed){
+		if(mouse_pressed&1){
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
 			bullets.add({
 				x : hero.x + hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), 
@@ -50,6 +50,19 @@ function controls ()
 				vx : 10*((mouse_x-hero.x- hero.width/2)/d),
 				vy : 10*((mouse_y-hero.y- hero.height/2)/d)
 			});
+		}
+		
+		if(mouse_pressed&4 && hero.grenades > 0){
+			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
+			var speed = (d/10 < 7 ? d/10 : 7);
+			grenades.add({
+				x : hero.x + hero.width/2 + translatedX,
+				y : hero.y + hero.width/2,
+				vx : speed*((mouse_x-hero.x- hero.width/2)/d),
+				vy : speed*((mouse_y-hero.y- hero.height/2)/d),
+				bang : 0
+ 			});
+			hero.grenades--;
 		}
 	}
 	

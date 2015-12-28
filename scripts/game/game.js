@@ -19,6 +19,7 @@ var bullets;
 //Set of enemies
 var enemies;
 var activeEnemies;
+var grenades;
 
 var lvl = 0;
 
@@ -89,6 +90,8 @@ END_OF_MAIN();
 //function loads elements on start of the game.
 function load_elements()
 {
+	grenades = new Set();
+	
 	translatedX = 0;
 	platforms = new Set();
 	activePlatforms = new Set();
@@ -122,7 +125,8 @@ function load_elements()
 			x: parseInt(arr[i].getAttribute("x")),
 			y: parseInt(arr[i].getAttribute("y")),
 			radius: parseInt(arr[i].getAttribute("radius")),
-			lastShotTime: time()
+			lastShotTime: time(),
+			hp: 100
 		});
 	}
 
@@ -138,6 +142,7 @@ function load_elements()
 		width : 15,
 		height : 15,
 		hp: 100,
+		grenades: 3,
 		platform: null
 	};
 }

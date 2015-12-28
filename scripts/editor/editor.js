@@ -25,6 +25,7 @@ var grid = false;
 var hero;
 
 var bullets; 
+var grenades;
 
 function main()
 {
@@ -58,6 +59,7 @@ function main()
 					width : 15,
 					height : 15,
 					hp: 100,
+					grenades: 3,
 					platform: null
 				};
 				translatedX = 0
@@ -84,4 +86,5 @@ function load_elements()
 	platforms = new Set();
 	enemies = new Set();
 	bullets = new Set();
+	grenades = new Set();
 }

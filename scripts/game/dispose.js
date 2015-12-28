@@ -17,8 +17,12 @@ function dispose ()
 		activeEnemies = new Set();
 		enemies.forEach(function(value){
 			//when platform is closer that 2*width the platform is assumed active
-			if((value.x - translatedX + 2*width) > hero.x && (value.x + value.radius - translatedX - 2*width< hero.x)){
+			if((value.x - translatedX + 2*width) > hero.x && (value.x + value.radius - translatedX - 2*width< hero.x) && value.hp >= 0){
 				activeEnemies.add(value);
+			}
+			
+			if(value.hp <= 0){
+				enemies.delete(value);
 			}
 			
 		});
@@ -27,6 +31,12 @@ function dispose ()
 		bullets.forEach(function(value){
 			if((value.x + width/2 + 50) < hero.x || (value.x - translatedX - width/2 - 50> hero.x)){
 				bullets.delete(value);
+			}
+		});
+		
+		grenades.forEach(function(value){
+			if(value.bang != 0 && time() - value.bang >= 2550){
+				grenades.delete(value);
 			}
 		});
 	}

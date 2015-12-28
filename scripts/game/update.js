@@ -17,6 +17,14 @@ function update(editor)
 			
 		});
 		
+		grenades.forEach(function(value){
+			if(value.bang == 0){
+				value.x += value.vx;
+				value.y += value.vy;
+				value.vy += 0.2;
+			}
+		});
+		
 		log(hero.hp);
 		
 		//if hero is currently not on platform make gravity brings him down
@@ -67,6 +75,31 @@ function update(editor)
 				}
 				
 			});
+			
+			grenades.forEach(function(grenade){
+				
+				if(grenade.x + 5 > value.x && grenade.x + 5 < value.x + value.width && grenade.y + 5 > value.y && grenade.y + 5 < value.y + value.height && grenade.bang == 0){
+					grenade.bang = time();
+					grenade.vx = 0;
+					grenade.vy= 0;
+					if(!editor){
+						activeEnemies.forEach(function(enemy){
+							d = distance(grenade.x + 5, grenade.y + 5, enemy.x + enemy.radius/2, enemy.y+enemy.radius/2);
+							if(d <= 75){
+								enemy.hp -= 150*(75-d)/75;
+								console.log(150*(75-d)/75);
+							}
+								
+						});
+						
+						d = distance(grenade.x - translatedX + 5, grenade.y + 5, hero.x + hero.width/2, hero.y+hero.width/2);
+						if(d <= 75){
+							hero.hp -= 150*(75-d)/75; 
+						}
+					}
+				}
+				
+			});
 		});
 		
 		activeEnemies.forEach(function(enemy){
@@ -75,7 +108,11 @@ function update(editor)
 				if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
 					bullets.delete(bullet);	
 					if(!editor){
-						enemies.delete(enemy);
+						if(enemy.hp <=25){
+							enemies.delete(enemy);
+						}else{
+							enemy.hp -= 25;
+						}
 					}
 				}
 			});

@@ -8,6 +8,14 @@ function draw()
 			circlefill(canvas, value.x, value.y, 2, makecol(255,0,0));
 		});
 		
+		grenades.forEach(function(value){
+			if(value.bang == 0){
+				circlefill(canvas, value.x - translatedX, value.y, 5, makecol(0,255,0));
+			}else{
+				circlefill(canvas, value.x - translatedX, value.y, 75, makecol(255,0,0,2550/(time()-value.bang)));
+			}
+		});
+		
 		//draw hero
 		circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 		
@@ -16,11 +24,12 @@ function draw()
 		circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
 		
 		activeEnemies.forEach(function(enemy){	
-			
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
 			circlefill(canvas, enemy.x - translatedX + enemy.radius/2 - 15*((enemy.x+enemy.radius/2 - translatedX -hero.x-hero.width/2)/d), enemy.y + enemy.radius/2 - 15*((enemy.y+enemy.radius/2-hero.y- hero.height/2)/d), 4, makecol(255,0,0));
 		
 			circlefill(canvas, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2, enemy.radius/2, makecol(255,0,0));
+			
+			rectfill(canvas, enemy.x - translatedX, enemy.y - 5, enemy.radius * enemy.hp/100, 5, makecol(0,255,0));
 		});
 		
 		//draw all platforms
@@ -48,6 +57,14 @@ function draw()
 			mv += 20;
 			
 		});
+		
+		mv = width - 20;
+		
+		for(var i = 0; i< hero.grenades; i++){
+			circlefill(canvas, mv, height - 20, 5, makecol(0,255,0));
+			mv -= 20;
+		}
+
 		if(enemies.size <= 0){
 			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,125));
 			textout_centre(canvas,font,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,20,makecol(0,0,0));
