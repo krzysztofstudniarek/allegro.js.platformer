@@ -142,6 +142,7 @@ function load_elements()
 		width : 15,
 		height : 15,
 		hp: 100,
+		grenades: 3,
 		platform: null
 	};
 }

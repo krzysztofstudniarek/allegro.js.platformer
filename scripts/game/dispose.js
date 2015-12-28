@@ -39,8 +39,6 @@ function dispose ()
 				grenades.delete(value);
 			}
 		});
-		
-		log(grenades.size);
 	}
 
 }

@@ -52,7 +52,7 @@ function controls ()
 			});
 		}
 		
-		if(mouse_pressed&4){
+		if(mouse_pressed&4 && hero.grenades > 0){
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
 			var speed = (d/10 < 7 ? d/10 : 7);
 			grenades.add({
@@ -62,7 +62,7 @@ function controls ()
 				vy : speed*((mouse_y-hero.y- hero.height/2)/d),
 				bang : 0
  			});
-			console.log(speed);
+			hero.grenades--;
 		}
 	}
 	
