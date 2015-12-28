@@ -31,6 +31,12 @@ function controls ()
 			goingRight = false;
 		}
 		
+		if(goingRight && goingLeft){
+			goingLeft = false;
+			goingRight = false;
+			hero.vx = 0;
+		}
+		
 		//sliding after key released	
 		if(hero.vx > 0){
 			hero.vx -= 0.1;
