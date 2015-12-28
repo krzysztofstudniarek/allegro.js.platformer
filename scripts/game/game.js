@@ -22,6 +22,7 @@ var activeEnemies;
 var grenades;
 
 var lvl = 0;
+var won = false;
 
 /*
 	Hero structure; x,y - hero position; width,height - hero size; vx,vy - hero speed; platform - platform that hero is currently standing on;
