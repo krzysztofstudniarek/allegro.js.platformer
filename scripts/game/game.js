@@ -122,7 +122,8 @@ function load_elements()
 			x: parseInt(arr[i].getAttribute("x")),
 			y: parseInt(arr[i].getAttribute("y")),
 			radius: parseInt(arr[i].getAttribute("radius")),
-			lastShotTime: time()
+			lastShotTime: time(),
+			hp: 100
 		});
 	}
 
