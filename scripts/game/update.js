@@ -75,7 +75,7 @@ function update(editor)
 				if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
 					bullets.delete(bullet);	
 					if(!editor){
-						if(enemy.hp <=0){
+						if(enemy.hp <=25){
 							enemies.delete(enemy);
 						}else{
 							enemy.hp -= 25;
