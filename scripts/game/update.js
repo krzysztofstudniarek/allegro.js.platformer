@@ -78,21 +78,22 @@ function update(editor)
 			
 			grenades.forEach(function(grenade){
 				
-				if(grenade.x > value.x && grenade.x < value.x + value.width && grenade.y > value.y && grenade.y < value.y + value.height && grenade.bang == 0){
+				if(grenade.x + 5 > value.x && grenade.x + 5 < value.x + value.width && grenade.y + 5 > value.y && grenade.y + 5 < value.y + value.height && grenade.bang == 0){
 					grenade.bang = time();
 					grenade.vx = 0;
 					grenade.vy= 0;
 					activeEnemies.forEach(function(enemy){
 						d = distance(grenade.x + 5, grenade.y + 5, enemy.x + enemy.radius/2, enemy.y+enemy.radius/2);
 						if(d <= 75){
-							enemy.hp -= 150*d/75 
+							enemy.hp -= 150*(75-d)/75;
+							console.log(150*(75-d)/75);
 						}
 							
 					});
 					
 					d = distance(grenade.x + 5, grenade.y + 5, hero.x + hero.width/2, hero.y+hero.width/2);
 					if(d <= 75){
-						hero.hp -= 150*d/75; 
+						hero.hp -= 150*(75-d)/75; 
 					}
 				}
 				
