@@ -108,12 +108,12 @@ function draw()
 		}
 		
 		if(mouse_x > width/2-100 && mouse_x < width/2+100 && mouse_y >height/2+30 && mouse_y<height/2+90){
-			textout_centre(canvas,font,"LEVE EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(0,0,0));
+			textout_centre(canvas,font,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(0,0,0));
 			if(mouse_b){
 				window.location.replace("editor.html");
 			}
 		}else{
-			textout_centre(canvas,font,"LEVE EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(255,255,255));
+			textout_centre(canvas,font,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(255,255,255));
 		}
 		
 	}else{
