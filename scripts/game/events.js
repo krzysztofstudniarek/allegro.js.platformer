@@ -5,6 +5,7 @@ function events()
 		if(hero.hp <= 0){
 			inGame = !inGame;
 			hero.hp = 100;
+			lvl = 0;
 		}
 		
 		if(enemies.size == 0){
