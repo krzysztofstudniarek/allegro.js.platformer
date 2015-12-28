@@ -59,6 +59,7 @@ function main()
 					width : 15,
 					height : 15,
 					hp: 100,
+					grenades: 3,
 					platform: null
 				};
 				translatedX = 0

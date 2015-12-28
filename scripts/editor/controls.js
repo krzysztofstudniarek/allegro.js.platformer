@@ -41,6 +41,7 @@ function editor_controls()
 				x: mouse_x + translatedX,
 				y: mouse_y,
 				radius: 15,
+				hp: 100,
 				lastShotTime: time()
 			});
 		}
