@@ -92,7 +92,7 @@ function update(editor)
 								
 						});
 						
-						d = distance(grenade.x + 5, grenade.y + 5, hero.x + hero.width/2, hero.y+hero.width/2);
+						d = distance(grenade.x - translatedX + 5, grenade.y + 5, hero.x + hero.width/2, hero.y+hero.width/2);
 						if(d <= 75){
 							hero.hp -= 150*(75-d)/75; 
 						}
