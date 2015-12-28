@@ -19,6 +19,7 @@ var bullets;
 //Set of enemies
 var enemies;
 var activeEnemies;
+var grenades;
 
 var lvl = 0;
 
@@ -89,6 +90,8 @@ END_OF_MAIN();
 //function loads elements on start of the game.
 function load_elements()
 {
+	grenades = new Set();
+	
 	translatedX = 0;
 	platforms = new Set();
 	activePlatforms = new Set();

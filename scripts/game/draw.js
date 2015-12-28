@@ -8,6 +8,14 @@ function draw()
 			circlefill(canvas, value.x, value.y, 2, makecol(255,0,0));
 		});
 		
+		grenades.forEach(function(value){
+			if(value.bang == 0){
+				circlefill(canvas, value.x - translatedX, value.y, 5, makecol(0,255,0));
+			}else{
+				circlefill(canvas, value.x - translatedX, value.y, 75, makecol(255,0,0,2550/(time()-value.bang)));
+			}
+		});
+		
 		//draw hero
 		circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 		

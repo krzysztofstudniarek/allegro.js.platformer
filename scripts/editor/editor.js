@@ -25,6 +25,7 @@ var grid = false;
 var hero;
 
 var bullets; 
+var grenades;
 
 function main()
 {
@@ -84,4 +85,5 @@ function load_elements()
 	platforms = new Set();
 	enemies = new Set();
 	bullets = new Set();
+	grenades = new Set();
 }

@@ -17,6 +17,14 @@ function update(editor)
 			
 		});
 		
+		grenades.forEach(function(value){
+			if(value.bang == 0){
+				value.x += value.vx;
+				value.y += value.vy;
+				value.vy += 0.2;
+			}
+		});
+		
 		log(hero.hp);
 		
 		//if hero is currently not on platform make gravity brings him down
@@ -64,6 +72,23 @@ function update(editor)
 				
 				if(bullet.x > value.x - translatedX && bullet.x < value.x - translatedX + value.width && bullet.y > value.y && bullet.y < value.y + value.height){
 					bullets.delete(bullet);
+				}
+				
+			});
+			
+			grenades.forEach(function(grenade){
+				
+				if(grenade.x > value.x && grenade.x < value.x + value.width && grenade.y > value.y && grenade.y < value.y + value.height && grenade.bang == 0){
+					grenade.bang = time();
+					grenade.vx = 0;
+					grenade.vy= 0;
+					activeEnemies.forEach(function(enemy){
+						d = distance(grenade.x, grenade.y, enemy.x, enemy.y);
+						if(d <= 75){
+							enemy.hp -= 150*d/75 
+						}
+							
+					});
 				}
 				
 			});
