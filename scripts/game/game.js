@@ -24,6 +24,8 @@ var grenades;
 var lvl = 0;
 var won = false;
 
+
+
 /*
 	Hero structure; x,y - hero position; width,height - hero size; vx,vy - hero speed; platform - platform that hero is currently standing on;
 	Starting Stucture:
@@ -48,7 +50,7 @@ var goingRight=false;
 var fr = 0;
 var lastTime = time();
 var fps = 60;
-
+var font1 = load_font("./antilles.ttf");
 //Side scroller translation variable
 var translatedX=250;
 
@@ -57,6 +59,7 @@ var inGame = false;
 function main()
 {
 	//Initiation of all elements
+	font1 = load_font("./antilles.ttf");
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
 	//load_elements();
