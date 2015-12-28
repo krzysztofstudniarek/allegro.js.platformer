@@ -5,9 +5,16 @@ function events()
 		if(hero.hp <= 0){
 			inGame = !inGame;
 			hero.hp = 100;
+			lvl = 0;
 		}
 		
 		if(enemies.size == 0){
+			if(lvl >= 2){
+				inGame = !inGame;
+				won = true;
+				hero.hp = 100;
+				lvl = 0;
+			}
 			if(pressed[KEY_SPACE]){
 				lvl++;
 				load_elements();
