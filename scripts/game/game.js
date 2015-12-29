@@ -23,6 +23,7 @@ var grenades;
 
 var lvl = 0;
 var won = false;
+var lost = false;
 
 
 

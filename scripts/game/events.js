@@ -4,6 +4,7 @@ function events()
 	if(inGame){
 		if(hero.hp <= 0){
 			inGame = !inGame;
+			lost = true;
 			hero.hp = 100;
 			lvl = 0;
 		}
@@ -18,9 +19,15 @@ function events()
 			if(pressed[KEY_SPACE]){
 				lvl++;
 				load_elements();
-				console.log(lvl);
 			}
 		}
+	}
+	
+	if(lost && pressed[KEY_SPACE]){
+		lvl = 0;
+		load_elements();
+		lost = false;
+		inGame = true;
 	}
 
 }
