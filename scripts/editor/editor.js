@@ -27,8 +27,11 @@ var hero;
 var bullets; 
 var grenades;
 
+var font1;
+
 function main()
 {
+	font1 = load_font("./antilles.ttf");
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
 	load_elements();
@@ -41,7 +44,7 @@ function main()
 				dispose(); //dispose all inactive elements (dispose.js)
 				controls(); //game controls (controls.js)
 				update(true); //update all elements (update.js)
-				draw(); //drawing all scene elements (draw.js)
+				draw(true); //drawing all scene elements (draw.js)
 			}else{
 				wipe_log();
 				clear_to_color(canvas,makecol(255,255,255));

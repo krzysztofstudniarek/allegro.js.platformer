@@ -1,6 +1,7 @@
 //Fucntion for drawing elements on canvas
-function draw()
+function draw(editor)
 {   
+	editor = editor !== 'undefined' ? editor : false;
 
 	if(inGame){
 		//draw all bullets
@@ -65,10 +66,11 @@ function draw()
 			mv -= 20;
 		}
 
-		if(enemies.size <= 0){
-			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,125));
-			textout_centre(canvas,font,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,20,makecol(0,0,0));
-			textout_centre(canvas,font,"press SPACE to continue",SCREEN_W/2,SCREEN_H/2+20,20,makecol(0,0,0));
+		if(enemies.size <= 0 && !editor){
+			rectfill(canvas, width/2-151, height/2-101, 302, 202, makecol(0,0,0,255));
+			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,255));
+			textout_centre(canvas,font1,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,30,makecol(0,0,0));
+			textout_centre(canvas,font1,"press SPACE to continue",SCREEN_W/2,SCREEN_H/2+20,30,makecol(0,0,0));
 		}
 		
 		
@@ -98,26 +100,26 @@ function draw()
 		polygon(canvas, 4, [width/2-100, height/2+90, width/2+100, height/2+90, x*10000, ((height/2 +90 - mouse_y)*(x*10000-mouse_x))/(width/2-100+200-mouse_x) + mouse_y, x1*10000, ((height/2 +90 - mouse_y)*(x1*10000-mouse_x))/(width/2-100-mouse_x) + mouse_y ], makecol(0,0,0));
 		
 		if(mouse_x > width/2-100 && mouse_x < width/2+100 && mouse_y >height/2-50 && mouse_y<height/2+10){
-			textout_centre(canvas,font,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,20,makecol(0,0,0));
+			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 			if(mouse_b){
 				load_elements();
 				inGame = !inGame;
 			}
 		}else{
-			textout_centre(canvas,font,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,20,makecol(255,255,255));
+			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(255,255,255));
 		}
 		
 		if(mouse_x > width/2-100 && mouse_x < width/2+100 && mouse_y >height/2+30 && mouse_y<height/2+90){
-			textout_centre(canvas,font,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(0,0,0));
+			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(0,0,0));
 			if(mouse_b){
 				window.location.replace("editor.html");
 			}
 		}else{
-			textout_centre(canvas,font,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,20,makecol(255,255,255));
+			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(255,255,255));
 		}
 		
 	}else{
-		textout_centre(canvas,font,"CONGRATULATIONS!",SCREEN_W/2,SCREEN_H/2-10,20,makecol(0,0,0));
-		textout_centre(canvas,font,"you've won the game.",SCREEN_W/2,SCREEN_H/2+15,20,makecol(0,0,0));
+		textout_centre(canvas,font1,"CONGRATULATIONS!",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
+		textout_centre(canvas,font1,"you've won the game.",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
 	}
 }
