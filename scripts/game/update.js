@@ -86,8 +86,22 @@ function update(editor)
 						activeEnemies.forEach(function(enemy){
 							d = distance(grenade.x + 5, grenade.y + 5, enemy.x + enemy.radius/2, enemy.y+enemy.radius/2);
 							if(d <= 75){
-								enemy.hp -= 150*(75-d)/75;
-								console.log(150*(75-d)/75);
+								
+								h = 150*(75-d)/75;
+								
+								if(enemy.hp <=h){
+									if(frand()<=0.5){
+										secrets.add({
+											x: enemy.x,
+											y: enemy.y,
+											radius: 10
+										});
+										console.log("ADDED SECRET " + enemy.x + " "+enemy.y);
+									}
+									enemies.delete(enemy);
+								}else{
+									enemy.hp -= h;
+								}
 							}
 								
 						});
@@ -109,6 +123,15 @@ function update(editor)
 					bullets.delete(bullet);	
 					if(!editor){
 						if(enemy.hp <=25){
+							
+							if(frand()<=0.5){
+								secrets.add({
+									x: enemy.x,
+									y: enemy.y,
+									radius: 10
+								});
+								console.log("ADDED SECRET " + enemy.x + " "+enemy.y);
+							}
 							enemies.delete(enemy);
 						}else{
 							enemy.hp -= 25;
@@ -128,6 +151,23 @@ function update(editor)
 					});
 					enemy.lastShotTime = time();
 				}
+			}
+			
+		});
+		
+		secrets.forEach(function(secret){
+			
+			if(distance(hero.x+hero.width/2, hero.y+hero.width/2, secret.x - translatedX + secret.radius/2, secret.y +secret.radius/2) <= secret.radius){
+				if(frand()<0.7 || hero.hp == 100){
+					hero.grenades++;
+				}else{
+					if(hero.hp < 80){
+						hero.hp += 20;
+					}else{
+						hero.hp = 100;
+					}
+				}
+				secrets.delete(secret);
 			}
 			
 		});

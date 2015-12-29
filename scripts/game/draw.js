@@ -17,6 +17,12 @@ function draw(editor)
 			}
 		});
 		
+		secrets.forEach(function(value){
+			circlefill(canvas, value.x+value.radius/2 - translatedX, value.y+value.radius/2, value.radius, makecol(255,255,0));
+			textout_centre(canvas,font1,"S",value.x+value.radius/2 - translatedX,value.y+value.radius,15,makecol(0,0,0));
+		});
+		
+		
 		//draw hero
 		circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 		
@@ -67,8 +73,8 @@ function draw(editor)
 		}
 
 		if(enemies.size <= 0 && !editor){
-			rectfill(canvas, width/2-151, height/2-101, 302, 202, makecol(0,0,0,255));
-			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,255));
+			rectfill(canvas, width/2-151, height/2-101, 302, 202, makecol(0,0,0,180));
+			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,180));
 			textout_centre(canvas,font1,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,30,makecol(0,0,0));
 			textout_centre(canvas,font1,"press SPACE to continue",SCREEN_W/2,SCREEN_H/2+20,30,makecol(0,0,0));
 		}

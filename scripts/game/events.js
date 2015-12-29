@@ -8,7 +8,6 @@ function events()
 			hero.hp = 100;
 			lvl = 0;
 		}
-		
 		if(enemies.size == 0){
 			if(lvl >= 2){
 				inGame = !inGame;

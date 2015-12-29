@@ -17,6 +17,7 @@ function editor_draw()
 
 		});
 		
+
 		//draw all platforms
 		platforms.forEach(function(value){
 			

@@ -20,6 +20,7 @@ var bullets;
 var enemies;
 var activeEnemies;
 var grenades;
+var secrets;
 
 var lvl = 0;
 var won = false;
@@ -96,6 +97,7 @@ END_OF_MAIN();
 function load_elements()
 {
 	grenades = new Set();
+	secrets = new Set();
 	
 	translatedX = 0;
 	platforms = new Set();
