@@ -141,15 +141,30 @@ function load_elements()
 	
 	bullets = new Set();
 	
-	hero = {
-		x : width/2,
-		y : 150,
-		vx : 0,
-		vy : 0,
-		width : 15,
-		height : 15,
-		hp: 100,
-		grenades: 3,
-		platform: null
-	};
+	if(hero != undefined){	
+		hero = {
+			x : width/2,
+			y : 150,
+			vx : 0,
+			vy : 0,
+			width : 15,
+			height : 15,
+			hp: 100,
+			grenades: 3+ ((hero.grenades - 3)>0?hero.grenades-3:0),
+			platform: null
+		};
+	}else{	
+		hero = {
+			x : width/2,
+			y : 150,
+			vx : 0,
+			vy : 0,
+			width : 15,
+			height : 15,
+			hp: 100,
+			grenades: 3,
+			platform: null
+		};
+	}
+
 }

@@ -28,7 +28,7 @@ function update(editor)
 		log(hero.hp);
 		
 		//if hero is currently not on platform make gravity brings him down
-		if(hero.platform == null && hero.vy <= 3){
+		if(hero.platform == null && hero.vy <= 5){
 				hero.vy += 0.2;
 		}
 

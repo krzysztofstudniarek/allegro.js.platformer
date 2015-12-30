@@ -28,6 +28,8 @@ var bullets;
 var grenades;
 
 var font1;
+var secrets;
+
 
 function main()
 {
@@ -90,4 +92,5 @@ function load_elements()
 	enemies = new Set();
 	bullets = new Set();
 	grenades = new Set();
+	secrets = new Set();
 }

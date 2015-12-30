@@ -106,21 +106,25 @@ function draw(editor)
 		polygon(canvas, 4, [width/2-100, height/2+90, width/2+100, height/2+90, x*10000, ((height/2 +90 - mouse_y)*(x*10000-mouse_x))/(width/2-100+200-mouse_x) + mouse_y, x1*10000, ((height/2 +90 - mouse_y)*(x1*10000-mouse_x))/(width/2-100-mouse_x) + mouse_y ], makecol(0,0,0));
 		
 		if(mouse_x >= width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2-50 && mouse_y <= height/2+10){
+			polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, width/2+100, height/2+10, width/2-100, height/2+10], makecol(255,255,255));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 			if(mouse_b){
 				load_elements();
 				inGame = !inGame;
 			}
 		}else{
+			polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, width/2+100, height/2+10, width/2-100, height/2+10], makecol(0,0,0));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(255,255,255));
 		}
 		
 		if(mouse_x >= width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2+30 && mouse_y <= height/2+90){
+			polygonfill(canvas, 4, [width/2-100, height/2+30, width/2+100, height/2+30, width/2+100, height/2+90, width/2-100, height/2+90], makecol(255,255,255));
 			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(0,0,0));
 			if(mouse_b){
 				window.location.replace("editor.html");
 			}
 		}else{
+			polygonfill(canvas, 4, [width/2-100, height/2+30, width/2+100, height/2+30, width/2+100, height/2+90, width/2-100, height/2+90], makecol(0,0,0));
 			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(255,255,255));
 		}
 		
