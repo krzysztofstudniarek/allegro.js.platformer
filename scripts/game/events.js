@@ -9,7 +9,7 @@ function events()
 			lvl = 0;
 		}
 		if(enemies.size == 0){
-			if(lvl >= 2){
+			if(lvl >= 3){
 				inGame = !inGame;
 				won = true;
 				hero.hp = 100;
