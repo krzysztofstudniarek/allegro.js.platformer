@@ -4,6 +4,9 @@ var isEditorSelected = false;
 var playPlay = false, playEditor = false;
 function draw(editor)
 {   
+
+	rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+	rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 	editor = editor !== 'undefined' ? editor : false;
 
 	if(inGame){

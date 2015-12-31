@@ -37,7 +37,7 @@ function main()
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
 	load_elements();
-	
+	load_sounds();
 	ready(function(){
         loop(function(){
 			if(gameMode){
