@@ -96,7 +96,6 @@ function update(editor)
 											y: enemy.y,
 											radius: 10
 										});
-										console.log("ADDED SECRET " + enemy.x + " "+enemy.y);
 									}
 									enemies.delete(enemy);
 								}else{
@@ -111,6 +110,8 @@ function update(editor)
 							hero.hp -= 150*(75-d)/75; 
 						}
 					}
+					var dist = distance(hero.x +hero.width/2, hero.y + hero.height/2, grenade.x + 5 - translatedX, grenade.y + 5);
+					play_sample(grenadeSound, (dist/500>1?0:(1- dist/500)));
 				}
 				
 			});
@@ -130,7 +131,7 @@ function update(editor)
 									y: enemy.y,
 									radius: 10
 								});
-								console.log("ADDED SECRET " + enemy.x + " "+enemy.y);
+								
 							}
 							enemies.delete(enemy);
 						}else{
@@ -207,7 +208,7 @@ function update(editor)
 }
 
 function cross(x1,y1,x2,y2,x3,y3,x4,y4){
-	console.log(x1+" "+y1+" "+x2+" "+y2+" "+x3+" "+y3+" "+x4+" "+y4);
+	
 	if ((det_matrix(x1, y1, x2, y2, x3, y3))*(det_matrix(x1, y1, x2, y2, x4, y4))>=0){
 		return false; 
 	}else if ((det_matrix(x3, y3, x4, y4, x1, y1))*(det_matrix(x3, y3, x4, y4, x2, y2))>=0){

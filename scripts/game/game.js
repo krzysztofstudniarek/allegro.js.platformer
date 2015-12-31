@@ -59,6 +59,7 @@ var translatedX=250;
 var inGame = false;
 
 var shotSound;
+var grenadeSound;
 
 function main()
 {
@@ -96,6 +97,7 @@ END_OF_MAIN();
 
 function load_sounds(){
 	shotSound = load_sample("sounds/Shot.wav");
+	grenadeSound = load_sample("sounds/Grenade.wav");
 }
 
 //function loads elements on start of the game.
