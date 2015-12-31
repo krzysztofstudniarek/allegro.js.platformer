@@ -58,13 +58,6 @@ var translatedX=250;
 
 var inGame = false;
 
-var shotSound;
-var grenadeSound;
-var deathSound;
-var bonusSound;
-var killSound;
-var menuSound;
-var winSound;
 
 function main()
 {
@@ -83,7 +76,7 @@ function main()
             update(); //update all elements (update.js)
 			events(); //events handling, like endgame, start game (events.js)
             draw(); //drawing all scene elements (draw.js)
-			
+			sound_control();
 			
 			//calculating and displaying frame rate
 			fr ++; 
@@ -100,15 +93,7 @@ function main()
 }
 END_OF_MAIN();
 
-function load_sounds(){
-	shotSound = load_sample("sounds/Shot.wav");
-	grenadeSound = load_sample("sounds/Grenade.wav");
-	deathSound = load_sample("sounds/Death.wav");
-	bonusSound = load_sample("sounds/Bonus.wav");
-	killSound = load_sample("sounds/Kill.wav");
-	menuSound = load_sample("sounds/MenuClick.wav");
-	winSound = load_sample("sounds/Win.wav");
-}
+
 
 //function loads elements on start of the game.
 function load_elements()

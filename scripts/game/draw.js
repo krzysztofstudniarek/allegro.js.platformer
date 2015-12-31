@@ -4,6 +4,7 @@ var isEditorSelected = false;
 var playPlay = false, playEditor = false;
 function draw(editor)
 {   
+
 	editor = editor !== 'undefined' ? editor : false;
 
 	if(inGame){
@@ -32,6 +33,10 @@ function draw(editor)
 		//draw heros hand
 		var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
 		circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
+		
+		
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		
 		activeEnemies.forEach(function(enemy){	
 			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
@@ -88,6 +93,9 @@ function draw(editor)
 		if(playPlay || playEditor){
 			play_sample(menuSound);
 		}
+		
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		
 		var x = sgn(width/2+100-mouse_x), x1 = sgn(width/2-100 - mouse_x);
 		
