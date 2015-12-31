@@ -181,6 +181,7 @@ function update(editor)
 					}
 				}
 				secrets.delete(secret);
+				play_sample(bonusSound);
 			}
 			
 		});
