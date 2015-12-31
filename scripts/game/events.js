@@ -7,6 +7,7 @@ function events()
 			lost = true;
 			hero.hp = 100;
 			lvl = 0;
+			play_sample(deathSound);
 		}
 		if(enemies.size == 0){
 			if(lvl >= 3){

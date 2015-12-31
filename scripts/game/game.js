@@ -60,6 +60,7 @@ var inGame = false;
 
 var shotSound;
 var grenadeSound;
+var deathSound;
 
 function main()
 {
@@ -98,6 +99,7 @@ END_OF_MAIN();
 function load_sounds(){
 	shotSound = load_sample("sounds/Shot.wav");
 	grenadeSound = load_sample("sounds/Grenade.wav");
+	deathSound = load_sample("sounds/Death.wav");
 }
 
 //function loads elements on start of the game.
