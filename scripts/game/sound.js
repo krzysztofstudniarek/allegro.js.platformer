@@ -23,7 +23,6 @@ function load_sounds(){
 }
 
 function sound_control(){
-	rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
 	draw_sprite(canvas,volSprites[vol],width-20,20);
 	if(distance(mouse_x, mouse_y, width-20, 20) < 10 && mouse_pressed&1){
 		vol = (vol+ 1)%4;
