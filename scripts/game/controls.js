@@ -56,6 +56,7 @@ function controls ()
 				vx : 10*((mouse_x-hero.x- hero.width/2)/d),
 				vy : 10*((mouse_y-hero.y- hero.height/2)/d)
 			});
+			play_sample(shotSound);
 		}
 		
 		if(mouse_pressed&4 && hero.grenades > 0){

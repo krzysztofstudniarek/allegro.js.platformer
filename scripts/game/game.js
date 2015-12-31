@@ -58,6 +58,14 @@ var translatedX=250;
 
 var inGame = false;
 
+var shotSound;
+var grenadeSound;
+var deathSound;
+var bonusSound;
+var killSound;
+var menuSound;
+var winSound;
+
 function main()
 {
 	//Initiation of all elements
@@ -65,7 +73,7 @@ function main()
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
 	//load_elements();
-	
+	load_sounds();
 	ready(function(){
         loop(function(){
 			wipe_log(); //clear log
@@ -92,6 +100,15 @@ function main()
 }
 END_OF_MAIN();
 
+function load_sounds(){
+	shotSound = load_sample("sounds/Shot.wav");
+	grenadeSound = load_sample("sounds/Grenade.wav");
+	deathSound = load_sample("sounds/Death.wav");
+	bonusSound = load_sample("sounds/Bonus.wav");
+	killSound = load_sample("sounds/Kill.wav");
+	menuSound = load_sample("sounds/MenuClick.wav");
+	winSound = load_sample("sounds/Win.wav");
+}
 
 //function loads elements on start of the game.
 function load_elements()

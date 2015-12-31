@@ -1,4 +1,7 @@
 //Funcrtion for in games events handling
+
+var sound = true;
+
 function events()
 {	
 	if(inGame){
@@ -7,8 +10,14 @@ function events()
 			lost = true;
 			hero.hp = 100;
 			lvl = 0;
+			play_sample(deathSound);
 		}
 		if(enemies.size == 0){
+			if(sound){
+				play_sample(winSound);
+				sound = false;
+			}
+			
 			if(lvl >= 3){
 				inGame = !inGame;
 				won = true;
@@ -18,6 +27,7 @@ function events()
 			if(pressed[KEY_SPACE]){
 				lvl++;
 				load_elements();
+				sound = true;
 			}
 		}
 	}
@@ -27,6 +37,7 @@ function events()
 		load_elements();
 		lost = false;
 		inGame = true;
+		sound = true;
 	}
 
 }
