@@ -170,9 +170,13 @@ function draw(editor)
 		}
 		
 	}else if(won){
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"CONGRATULATIONS!",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"you've won the game.",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
 	}else if(lost){
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"GAME OVER!",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"press SPACE to play again",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
 	}
