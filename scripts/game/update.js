@@ -134,6 +134,8 @@ function update(editor)
 								
 							}
 							enemies.delete(enemy);
+							var dist = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x + 5 - translatedX, enemy.y + 5);
+							play_sample(killSound, (dist/300>1?0:(1- dist/300)));
 						}else{
 							enemy.hp -= 25;
 						}

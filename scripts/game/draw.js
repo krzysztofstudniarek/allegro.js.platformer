@@ -1,4 +1,7 @@
 //Fucntion for drawing elements on canvas
+var isPlaySelected = false;
+var isEditorSelected = false;
+var playPlay = false, playEditor = false;
 function draw(editor)
 {   
 	editor = editor !== 'undefined' ? editor : false;
@@ -81,6 +84,11 @@ function draw(editor)
 		
 		
 	}else if(!won && !lost){
+		
+		if(playPlay || playEditor){
+			play_sample(menuSound);
+		}
+		
 		var x = sgn(width/2+100-mouse_x), x1 = sgn(width/2-100 - mouse_x);
 		
 		polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, x*10000, ((height/2 -50 - mouse_y)*(x*10000-mouse_x))/(width/2-100+200-mouse_x) + mouse_y, x1*10000, ((height/2 -50 - mouse_y)*(x1*10000-mouse_x))/(width/2-100-mouse_x) + mouse_y ], makecol(0,0,0));
@@ -106,6 +114,12 @@ function draw(editor)
 		polygon(canvas, 4, [width/2-100, height/2+90, width/2+100, height/2+90, x*10000, ((height/2 +90 - mouse_y)*(x*10000-mouse_x))/(width/2-100+200-mouse_x) + mouse_y, x1*10000, ((height/2 +90 - mouse_y)*(x1*10000-mouse_x))/(width/2-100-mouse_x) + mouse_y ], makecol(0,0,0));
 		
 		if(mouse_x >= width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2-50 && mouse_y <= height/2+10){
+			if(!isPlaySelected){
+				playPlay = true;
+				isPlaySelected = true;
+			}else{
+				playPlay = false;
+			}
 			polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, width/2+100, height/2+10, width/2-100, height/2+10], makecol(255,255,255));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 			if(mouse_b){
@@ -113,17 +127,36 @@ function draw(editor)
 				inGame = !inGame;
 			}
 		}else{
+			if(isPlaySelected){
+				isPlaySelected = false;
+				playPlay = true;
+			}else{
+				playPlay = false;
+			}
 			polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, width/2+100, height/2+10, width/2-100, height/2+10], makecol(0,0,0));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(255,255,255));
 		}
 		
 		if(mouse_x >= width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2+30 && mouse_y <= height/2+90){
+			if(!isEditorSelected){
+				playEditor = true;
+				isEditorSelected = true;
+			}else{
+				playEditor = false;
+			}
+			
 			polygonfill(canvas, 4, [width/2-100, height/2+30, width/2+100, height/2+30, width/2+100, height/2+90, width/2-100, height/2+90], makecol(255,255,255));
 			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(0,0,0));
 			if(mouse_b){
 				window.location.replace("editor.html");
 			}
 		}else{
+			if(isEditorSelected){
+				isEditorSelected = false;
+				playEditor = true;
+			}else{
+				playEditor = false;
+			}
 			polygonfill(canvas, 4, [width/2-100, height/2+30, width/2+100, height/2+30, width/2+100, height/2+90, width/2-100, height/2+90], makecol(0,0,0));
 			textout_centre(canvas,font1,"LEVEL EDITOR",SCREEN_W/2,SCREEN_H/2+70,30,makecol(255,255,255));
 		}
