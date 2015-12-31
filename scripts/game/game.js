@@ -58,6 +58,8 @@ var translatedX=250;
 
 var inGame = false;
 
+var shotSound;
+
 function main()
 {
 	//Initiation of all elements
@@ -65,7 +67,7 @@ function main()
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
 	//load_elements();
-	
+	load_sounds();
 	ready(function(){
         loop(function(){
 			wipe_log(); //clear log
@@ -92,6 +94,9 @@ function main()
 }
 END_OF_MAIN();
 
+function load_sounds(){
+	shotSound = load_sample("sounds/Shot.wav");
+}
 
 //function loads elements on start of the game.
 function load_elements()

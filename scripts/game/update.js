@@ -141,15 +141,27 @@ function update(editor)
 			});
 
 			if((time() - enemy.lastShotTime) >= 200 & frand()<=0.5){
+				
+				var shot = true;
+				
+				activePlatforms.forEach(function(platform){
+					if(
+						(shot && cross(platform.x - translatedX, platform.y, platform.x + platform.width - translatedX, platform.y, hero.x+hero.width/2, hero.y + hero.width/2, enemy.x-translatedX + enemy.radius/2, enemy.y+enemy.radius/2) || 
+						cross(platform.x - translatedX, platform.y, platform.x - translatedX, platform.y+platform.height, hero.x+hero.width/2, hero.y + hero.width/2, enemy.x-translatedX + enemy.radius/2, enemy.y+enemy.radius/2))){
+						shot = false;
+					}
+				});
+				
 				var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
-				if(d < 200 ){
+				if(d < 200 && shot ){
 					bullets.add({
 						x : enemy.x + enemy.radius/2 - translatedX - 15*((enemy.x+enemy.radius/2 - translatedX-hero.x-hero.width/2)/d), 
 						y : enemy.y + enemy.radius/2 - 15*((enemy.y + enemy.radius/2 - hero.y- hero.height/2)/d),
 						vx : -10*((enemy.x + enemy.radius/2 - translatedX-hero.x- hero.width/2)/d),
 						vy : -10*((enemy.y + enemy.radius/2 - hero.y - hero.height/2)/d)
 					});
-					enemy.lastShotTime = time();
+					play_sample(shotSound, (d/200)>1?0:(1- d/200));
+					enemy.lastShotTime = time();d
 				}
 			}
 			
@@ -192,4 +204,21 @@ function update(editor)
 		}
 	}
 	
+}
+
+function cross(x1,y1,x2,y2,x3,y3,x4,y4){
+	console.log(x1+" "+y1+" "+x2+" "+y2+" "+x3+" "+y3+" "+x4+" "+y4);
+	if ((det_matrix(x1, y1, x2, y2, x3, y3))*(det_matrix(x1, y1, x2, y2, x4, y4))>=0){
+		return false; 
+	}else if ((det_matrix(x3, y3, x4, y4, x1, y1))*(det_matrix(x3, y3, x4, y4, x2, y2))>=0){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function det_matrix(xx,xy,yx,yy,zx,zy)
+{
+	return (xx*yy + yx*zy + zx*xy - zx*yy - xx*zy - yx*xy);
 }
