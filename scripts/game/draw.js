@@ -133,6 +133,7 @@ function draw(editor)
 			if(mouse_b){
 				load_elements();
 				inGame = !inGame;
+				play_sample(backgroundSound,1.0,1.0,true);
 			}
 		}else{
 			if(isPlaySelected){

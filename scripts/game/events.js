@@ -10,6 +10,7 @@ function events()
 			lost = true;
 			hero.hp = 100;
 			lvl = 0;
+			stop_sample(backgroundSound);
 			play_sample(deathSound);
 		}
 		if(enemies.size == 0){
@@ -38,6 +39,7 @@ function events()
 		lost = false;
 		inGame = true;
 		sound = true;
+		play_sample(backgroundSound,1.0,1.0,true);
 	}
 
 }

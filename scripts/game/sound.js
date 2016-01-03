@@ -20,7 +20,6 @@ function load_sounds(){
 	winSound = load_sample("sounds/Win.wav");
 	
 	backgroundSound = load_sample("sounds/Background.mp3");
-	play_sample(backgroundSound,1.0,1.0,true);
 	
 	volSprites = [load_bmp("sprites/volume0.png"),load_bmp("sprites/volume1.png"), load_bmp("sprites/volume2.png"), load_bmp("sprites/volume3.png") ];
 	
