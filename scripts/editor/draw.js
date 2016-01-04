@@ -32,7 +32,7 @@ function editor_draw()
 				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,255,0));
 			}else{
 				//draw platform body
-				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
+				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, value.trap?makecol(255,0,0):makecol(0,0,0));
 			}
 
 		});

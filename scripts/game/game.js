@@ -124,7 +124,8 @@ function load_elements()
 				y: parseInt(arr[i].getAttribute("y")),
 				width: parseInt(arr[i].getAttribute("width")),
 				height: parseInt(arr[i].getAttribute("height")),
-				drawShades: arr[i].getAttribute("drawShades") == "true"
+				drawShades: arr[i].getAttribute("drawShades") == "true",
+				trap: arr[i].getAttribute("trap") == "true"
 		});
 	}
 	
@@ -152,6 +153,7 @@ function load_elements()
 			width : 15,
 			height : 15,
 			hp: 100,
+			lives : hero.lives >= 0 ? hero.lives : 3,
 			grenades: 3+ ((hero.grenades - 3)>0?hero.grenades-3:0),
 			platform: null
 		};
@@ -165,6 +167,7 @@ function load_elements()
 			height : 15,
 			hp: 100,
 			grenades: 3,
+			lives : 3,
 			platform: null
 		};
 	}

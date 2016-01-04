@@ -47,17 +47,31 @@ function draw(editor)
 			rectfill(canvas, enemy.x - translatedX, enemy.y - 5, enemy.radius * enemy.hp/100, 5, makecol(0,255,0));
 		});
 		
+		activePlatforms.forEach(function(value){
+			if(value.trap){
+				
+				if(value.drawShades){
+						var x = sgn(value.x - translatedX+value.width-hero.x), x1 = sgn(value.x - translatedX-hero.x);
+						polygonfill(canvas, 4, [value.x - translatedX, value.y, value.x - translatedX+value.width, value.y+value.height, x*10000, ((value.y+value.height - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
+						polygonfill(canvas, 4, [value.x - translatedX, value.y+value.height, value.x - translatedX+value.width, value.y, x*10000, ((value.y - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y+value.height - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
+				}
+				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(255,0,0));
+			}
+		});
+		
 		//draw all platforms
 		activePlatforms.forEach(function(value){
 			
 			//draw platform body
-			rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
-			
-			//draw platform shades, relatively to hero positiond
-			if(value.drawShades){
-					var x = sgn(value.x - translatedX+value.width-hero.x), x1 = sgn(value.x - translatedX-hero.x);
-					polygonfill(canvas, 4, [value.x - translatedX, value.y, value.x - translatedX+value.width, value.y+value.height, x*10000, ((value.y+value.height - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
-					polygonfill(canvas, 4, [value.x - translatedX, value.y+value.height, value.x - translatedX+value.width, value.y, x*10000, ((value.y - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y+value.height - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
+			if(!value.trap){
+				rectfill(canvas, value.x - translatedX, value.y, value.width, value.height, makecol(0,0,0));
+				
+				//draw platform shades, relatively to hero positiond
+				if(value.drawShades){
+						var x = sgn(value.x - translatedX+value.width-hero.x), x1 = sgn(value.x - translatedX-hero.x);
+						polygonfill(canvas, 4, [value.x - translatedX, value.y, value.x - translatedX+value.width, value.y+value.height, x*10000, ((value.y+value.height - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
+						polygonfill(canvas, 4, [value.x - translatedX, value.y+value.height, value.x - translatedX+value.width, value.y, x*10000, ((value.y - hero.y)*(x*10000-hero.x))/(value.x - translatedX+value.width-hero.x) + hero.y, x1*10000, ((value.y+value.height - hero.y)*(x1*10000-hero.x))/(value.x - translatedX-hero.x) + hero.y ], makecol(0,0,0));
+				}
 			}
 			
 		});
@@ -175,10 +189,15 @@ function draw(editor)
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"CONGRATULATIONS!",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"you've won the game.",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
-	}else if(lost){
+	}else if(lost && hero.lives <= 0){
 		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"GAME OVER!",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"press SPACE to play again",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
+	}else if(lost && hero.lives > 0){
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
+		textout_centre(canvas,font1,"You've got "+hero.lives+" lives left",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
+		textout_centre(canvas,font1,"press SPACE to keep on playing",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
 	}
 }

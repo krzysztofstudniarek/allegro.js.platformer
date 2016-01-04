@@ -35,7 +35,8 @@ function editor_logic(){
 						y: newY<y?newY:y,
 						width: abs(newX - x),
 						height: abs(newY - y),
-						drawShades: true
+						drawShades: true,
+						trap: false
 				});
 			}
 			
@@ -49,7 +50,8 @@ function editor_logic(){
 					y: newY<mouse_y?newY:mouse_y,
 					width: abs(newX - mouse_x),
 					height: abs(newY - mouse_y),
-					drawShades: true
+					drawShades: true,
+					trap: false
 			});
 			
 			newX = undefined;
@@ -67,7 +69,7 @@ function editor_logic(){
 			var tx = "<lvl><platforms>";
 			
 			platforms.forEach(function(value){
-				tx += "<platform x='"+value.x+"' y='"+value.y+"' width='"+value.width+"' height='"+value.height+"' drawShades='true'></platform>"
+				tx += "<platform x='"+value.x+"' y='"+value.y+"' width='"+value.width+"' height='"+value.height+"' drawShades='true' trap='"+value.trap+"'></platform>"
 			});
 			
 			
@@ -110,7 +112,8 @@ function readLvlFromFile(evt) {
 						y: parseInt(arr[i].getAttribute("y")),
 						width: parseInt(arr[i].getAttribute("width")),
 						height: parseInt(arr[i].getAttribute("height")),
-						drawShades: arr[i].getAttribute("drawShades") == "true"
+						drawShades: arr[i].getAttribute("drawShades") == "true",
+						trap: arr[i].getAttribute("trap") == "true"
 				});
 			}
 			

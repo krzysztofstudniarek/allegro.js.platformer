@@ -5,13 +5,23 @@ var sound = true;
 function events()
 {	
 	if(inGame){
-		if(hero.hp <= 0){
+		console.log(hero.lives);
+		if(hero.hp <= 0 && hero.lives > 0){
+			inGame = !inGame;
+			lost = true;
+			hero.hp = 100;
+			//lvl = 0;
+			hero.lives --;
+			stop_sample(backgroundSound);
+			play_sample(deathSound);
+		}else if(hero.hp <= 0 && hero.lives <= 0){
 			inGame = !inGame;
 			lost = true;
 			hero.hp = 100;
 			lvl = 0;
 			stop_sample(backgroundSound);
 			play_sample(deathSound);
+			console.log("game over");
 		}
 		if(enemies.size == 0){
 			if(sound){
@@ -19,11 +29,11 @@ function events()
 				sound = false;
 			}
 			
-			if(lvl >= 3){
+			if(lvl >= 4){
 				inGame = !inGame;
 				won = true;
 				hero.hp = 100;
-				lvl = 0;
+				lvl  = 0;
 			}
 			if(pressed[KEY_SPACE]){
 				lvl++;
@@ -34,7 +44,6 @@ function events()
 	}
 	
 	if(lost && pressed[KEY_SPACE]){
-		lvl = 0;
 		load_elements();
 		lost = false;
 		inGame = true;

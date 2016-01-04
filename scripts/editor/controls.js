@@ -36,6 +36,10 @@ function editor_controls()
 			selectedEnemy = undefined;
 		}
 		
+		if(selectedPlatform != undefined && pressed[KEY_T]){
+			selectedPlatform.trap = !selectedPlatform.trap;
+		}
+		
 		if(pressed[KEY_SPACE]){
 			enemies.add({
 				x: mouse_x + translatedX,
