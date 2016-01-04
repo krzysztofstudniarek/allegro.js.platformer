@@ -74,8 +74,8 @@ function main()
 			dispose(); //dispose all inactive elements (dispose.js)
 			controls(); //game controls (controls.js)
             update(); //update all elements (update.js)
-			events(); //events handling, like endgame, start game (events.js)
             draw(); //drawing all scene elements (draw.js)
+			events(); //events handling, like endgame, start game (events.js)
 			sound_control();
 			
 			//calculating and displaying frame rate
@@ -153,7 +153,7 @@ function load_elements()
 			width : 15,
 			height : 15,
 			hp: 100,
-			lives : hero.lives >= 0 ? hero.lives : 3,
+			lives : hero.lives > 0 ? hero.lives : 3,
 			grenades: 3+ ((hero.grenades - 3)>0?hero.grenades-3:0),
 			platform: null
 		};
