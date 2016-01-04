@@ -124,7 +124,8 @@ function load_elements()
 				y: parseInt(arr[i].getAttribute("y")),
 				width: parseInt(arr[i].getAttribute("width")),
 				height: parseInt(arr[i].getAttribute("height")),
-				drawShades: arr[i].getAttribute("drawShades") == "true"
+				drawShades: arr[i].getAttribute("drawShades") == "true",
+				trap: arr[i].getAttribute("trap") == "true"
 		});
 	}
 	

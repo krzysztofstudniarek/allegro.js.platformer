@@ -6,7 +6,6 @@ body {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	border:1px solid #888; 
 	display:block; 
     margin-top: -320px; /*set to a negative number 1/2 of your height*/
     margin-left: -240px; /*set to a negative number 1/2 of your width*/
@@ -27,11 +26,13 @@ body {
 }
 
 #input-container{
-	text-align:left; 
+	overflow: auto; 
+	text-align:center;	
 	width: 620px;
 	overflow: auto; 
 	margin: 10px auto;
 	padding:10px;
+	background-color:#fff;
 }
 
 #legend{

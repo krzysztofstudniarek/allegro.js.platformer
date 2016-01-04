@@ -216,6 +216,10 @@ function update(editor)
 			hero.platform = null;
 		}
 		
+		if(hero.platform != null && hero.platform.trap){
+			hero.hp -=5;
+		}
+		
 		//If hero falls out of the canvas by bottom edge it falls from the top again.
 		if(hero.y > 480){
 			hero.y = 0;

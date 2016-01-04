@@ -35,7 +35,8 @@ function editor_logic(){
 						y: newY<y?newY:y,
 						width: abs(newX - x),
 						height: abs(newY - y),
-						drawShades: true
+						drawShades: true,
+						trap: false
 				});
 			}
 			
@@ -49,7 +50,8 @@ function editor_logic(){
 					y: newY<mouse_y?newY:mouse_y,
 					width: abs(newX - mouse_x),
 					height: abs(newY - mouse_y),
-					drawShades: true
+					drawShades: true,
+					trap: false
 			});
 			
 			newX = undefined;
