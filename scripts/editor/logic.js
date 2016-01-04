@@ -69,7 +69,7 @@ function editor_logic(){
 			var tx = "<lvl><platforms>";
 			
 			platforms.forEach(function(value){
-				tx += "<platform x='"+value.x+"' y='"+value.y+"' width='"+value.width+"' height='"+value.height+"' drawShades='true'></platform>"
+				tx += "<platform x='"+value.x+"' y='"+value.y+"' width='"+value.width+"' height='"+value.height+"' drawShades='true' trap='"+value.trap+"'></platform>"
 			});
 			
 			
