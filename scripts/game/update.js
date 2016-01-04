@@ -118,6 +118,20 @@ function update(editor)
 		});
 		
 		activeEnemies.forEach(function(enemy){
+			// enemy collision
+			if( (hero.x + hero.width >= enemy.x - translatedX - enemy.radius/2) &&
+				(hero.x < enemy.x - translatedX + enemy.radius/2) &&
+				(hero.y <= enemy.y + enemy.radius/2) &&
+				(hero.y + hero.height >= enemy.y - enemy.radius/2))
+			{
+				if (hero.vx != 0) {
+					hero.vx = -hero.vx;
+				}
+
+				if (hero.vy != 0) {
+					hero.vy = -hero.vy;
+				}
+			}
 
 			bullets.forEach(function(bullet){
 				if(distance(bullet.x, bullet.y, enemy.x + enemy.radius/2 - translatedX, enemy.y +enemy.radius/2) < enemy.radius/2){
