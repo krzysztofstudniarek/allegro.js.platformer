@@ -12,6 +12,7 @@ body {
 	display:inline-block; 
 	width: 640px;
 	height: 480px;
+	margin:50px;
 }
  
 #debug { 
