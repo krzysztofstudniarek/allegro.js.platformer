@@ -26,8 +26,6 @@ var lvl = 0;
 var won = false;
 var lost = false;
 
-
-
 /*
 	Hero structure; x,y - hero position; width,height - hero size; vx,vy - hero speed; platform - platform that hero is currently standing on;
 	Starting Stucture:
@@ -58,7 +56,6 @@ var translatedX=250;
 
 var inGame = false;
 
-
 function main()
 {
 	//Initiation of all elements
@@ -67,9 +64,11 @@ function main()
     allegro_init_all("game_canvas", width, height);
 	//load_elements();
 	load_sounds();
+	initAchivements();
 	ready(function(){
         loop(function(){
 			wipe_log(); //clear log
+			achivements();
             clear_to_color(canvas,makecol(255,255,255)); //clear display
 			dispose(); //dispose all inactive elements (dispose.js)
 			controls(); //game controls (controls.js)

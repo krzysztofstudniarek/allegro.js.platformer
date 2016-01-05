@@ -1,14 +1,15 @@
+@font-face {
+    font-family: 'antilles'; /*a name to be used later*/
+    src: url('antilles.ttf'); /*URL to font*/
+}
+
 body {
 	background-color : black;
+	text-align : center;
 }
 
 #game_canvas { 
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	display:block; 
-    margin-top: -320px; /*set to a negative number 1/2 of your height*/
-    margin-left: -240px; /*set to a negative number 1/2 of your width*/
+	display:inline-block; 
 	width: 640px;
 	height: 480px;
 }
@@ -41,4 +42,26 @@ body {
 	overflow: auto; 
 	margin: 10px auto;
 	padding:10px;
+}
+
+#achievements{
+	width: 100%;
+	height: 50pc;
+	background-color: #000;
+	text-align: left;
+	padding: 50px;
+}
+
+#achv{
+	margin : 15px;
+	float: left;
+	width: 100px;
+	height:100px;
+	background-color: #fff;
+	text-align: center;
+	vertical-align: center;
+	line-height: 100px;  
+	color: #000;
+	font-family: antilles;
+	font-size: 25px;
 }
