@@ -12,8 +12,22 @@ function achivements(){
 }
 
 function initAchivements(){
+	
 	achivs = new Set();
 	elem = document.getElementById("achievements");
+	
+	if(typeof(Storage) !== "undefined") {
+		console.log("GETTING ACHIVEMENTS FROM STORAGE");
+		var arr = JSON.parse(localStorage.getItem("achievements"));
+		if(arr != undefined){
+			console.log(arr.length);
+			for(var i = 0; i<arr.length; i++){
+				addAchievement(arr[i]);
+			}
+		}
+	} else {
+		console.log("LOCAL STORAGE NOT AVAILABLE");
+	}
 }
 
 function addAchievement(value){
@@ -22,4 +36,6 @@ function addAchievement(value){
 		ach.setAttribute("id","achv");
 		ach.innerHTML = value;
 		elem.appendChild(ach);
+		localStorage.setItem("achievements", JSON.stringify(Array.from(achivs)));
+		console.log(JSON.stringify(Array.from(achivs)));
 }
