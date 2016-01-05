@@ -1,5 +1,6 @@
 var elem;
 var achivs;
+var enemiesKilled;
 
 function achivements(){
 	if(inGame && !achivs.has("start")){
@@ -9,24 +10,38 @@ function achivements(){
 	if(hero != null && hero.platform != null && hero.platform.trap && lost && !achivs.has("it's a trap")){
 		addAchievement("it's a trap");
 	}
+	
+	if(enemiesKilled >= 5 && !achivs.has("5 kills")){
+		addAchievement("5 kills");
+	}
+	
+	if(enemiesKilled >= 10 && !achivs.has("10 kills")){
+		addAchievement("10 kills");
+	}
+	
+	console.log(enemiesKilled);
+	
+	if(typeof(Storage) !== undefined) {
+		localStorage.setItem("killed_enemies", enemiesKilled);
+	}
 }
 
 function initAchivements(){
 	
 	achivs = new Set();
 	elem = document.getElementById("achievements");
-	
-	if(typeof(Storage) !== "undefined") {
-		console.log("GETTING ACHIVEMENTS FROM STORAGE");
+	enemiesKilled = 0;
+
+	if(typeof(Storage) !== undefined) {
 		var arr = JSON.parse(localStorage.getItem("achievements"));
 		if(arr != undefined){
-			console.log(arr.length);
 			for(var i = 0; i<arr.length; i++){
 				addAchievement(arr[i]);
 			}
 		}
+		enemiesKilled = localStorage.getItem("killed_enemies")!= undefined?parseInt(localStorage.getItem("killed_enemies")) : 0;
 	} else {
-		console.log("LOCAL STORAGE NOT AVAILABLE");
+		allert("Your browser does not support LocalStorage. \n You could play, but your achievements would not be saved");
 	}
 }
 
@@ -36,6 +51,7 @@ function addAchievement(value){
 		ach.setAttribute("id","achv");
 		ach.innerHTML = value;
 		elem.appendChild(ach);
-		localStorage.setItem("achievements", JSON.stringify(Array.from(achivs)));
-		console.log(JSON.stringify(Array.from(achivs)));
+		if(typeof(Storage) !== undefined) {
+			localStorage.setItem("achievements", JSON.stringify(Array.from(achivs)));
+		}
 }
