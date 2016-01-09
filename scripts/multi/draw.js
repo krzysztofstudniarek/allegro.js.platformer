@@ -21,12 +21,6 @@ function draw(editor)
 			}
 		});
 		
-		secrets.forEach(function(value){
-			circlefill(canvas, value.x+value.radius/2 - translatedX, value.y+value.radius/2, value.radius, makecol(255,255,0));
-			textout_centre(canvas,font1,"S",value.x+value.radius/2 - translatedX,value.y+value.radius,15,makecol(0,0,0));
-		});
-		
-		
 		//draw hero
 		circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 		
@@ -37,15 +31,6 @@ function draw(editor)
 		
 		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
-		
-		activeEnemies.forEach(function(enemy){	
-			var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2);
-			circlefill(canvas, enemy.x - translatedX + enemy.radius/2 - 15*((enemy.x+enemy.radius/2 - translatedX -hero.x-hero.width/2)/d), enemy.y + enemy.radius/2 - 15*((enemy.y+enemy.radius/2-hero.y- hero.height/2)/d), 4, makecol(255,0,0));
-		
-			circlefill(canvas, enemy.x+enemy.radius/2 - translatedX, enemy.y+enemy.radius/2, enemy.radius/2, makecol(255,0,0));
-			
-			rectfill(canvas, enemy.x - translatedX, enemy.y - 5, enemy.radius * enemy.hp/100, 5, makecol(0,255,0));
-		});
 		
 		activePlatforms.forEach(function(value){
 			if(value.trap){
@@ -80,27 +65,12 @@ function draw(editor)
 
 		var mv = 20;
 		
-		enemies.forEach(function (value){
-			
-			circlefill(canvas, mv, height - 20, 5, makecol(255,0,0));
-			mv += 20;
-			
-		});
-		
 		mv = width - 20;
 		
 		for(var i = 0; i< hero.grenades; i++){
 			circlefill(canvas, mv, height - 20, 5, makecol(0,255,0));
 			mv -= 20;
 		}
-
-		if(enemies.size <= 0 && !editor){
-			rectfill(canvas, width/2-151, height/2-101, 302, 202, makecol(0,0,0,180));
-			rectfill(canvas, width/2-150, height/2-100, 300, 200, makecol(255,255,255,180));
-			textout_centre(canvas,font1,"LEVEL CLEARED",SCREEN_W/2,SCREEN_H/2-20,30,makecol(0,0,0));
-			textout_centre(canvas,font1,"press SPACE to continue",SCREEN_W/2,SCREEN_H/2+20,30,makecol(0,0,0));
-		}
-		
 		
 	}else if(!won && !lost){
 		
@@ -137,7 +107,6 @@ function draw(editor)
 				//inGame = !inGame;
 				//play_sample(backgroundSound,1.0,1.0,true);
 				peerID = prompt("Please enter your oponent peer ID", "");
-				
 			}
 		}else{
 			if(isPlaySelected){

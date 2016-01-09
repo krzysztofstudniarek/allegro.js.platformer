@@ -41,6 +41,7 @@ var lost = false;
 	};
 */
 var hero;
+var opponent;
 
 //Flags used to make controls smooth
 var goingLeft=false; 
@@ -70,13 +71,14 @@ function main()
 		myID = id;
 		console.log('My peer ID is: ' + myID);
 	});
+	
 	peer.on('connection', function(connection) { 
-		console.log("Connected");
-		conn = connection;
-		
-		conn.on('data', function(data) {
-			console.log('Received', data);
+		console.log(connection);
+		connection.on('data', function(data) {
+				console.log(data);
 		});
+		
+		conn = connection;
 		
 		inGame = true;
 		
@@ -95,20 +97,23 @@ function main()
 			wipe_log(); //clear log
             clear_to_color(canvas,makecol(255,255,255)); //clear display
             draw(); //drawing all scene elements (draw.js)
+			update();
+			controls();
 			sound_control();
+			dispose();
 			if(peerID != null && !inGame){
 				console.log(peerID);
 				conn = peer.connect(peerID);
 				conn.on('data', function(data) {
-					console.log('Received', data);
+					console.log(data);
 				});
-				
-				conn.send('hello');
+				console.log(conn);
+				conn.send(myID);
 				inGame = true;
 			}
 			
 			if(conn != null){
-				conn.send('hello '+myID);
+				conn.send(hero);
 			}
 			//calculating and displaying frame rate
 			fr ++; 
@@ -136,9 +141,6 @@ function load_elements()
 	translatedX = 0;
 	platforms = new Set();
 	activePlatforms = new Set();
-	
-	enemies = new Set();
-	activeEnemies = new Set();
 
 	levels = document.getElementsByTagName("lvl");
 	for(var i = 0; i< levels.length; i++){
@@ -161,47 +163,19 @@ function load_elements()
 		});
 	}
 	
-	arr = level.getElementsByTagName("enemies")[0].getElementsByTagName("enemy");
-	for(var i =0; i < arr.length; i++){
-		enemies.add({
-			x: parseInt(arr[i].getAttribute("x")),
-			y: parseInt(arr[i].getAttribute("y")),
-			radius: parseInt(arr[i].getAttribute("radius")),
-			lastShotTime: time(),
-			hp: 100
-		});
-	}
-
-	
-	
 	bullets = new Set();
 	
-	if(hero != undefined){	
-		hero = {
-			x : width/2,
-			y : 150,
-			vx : 0,
-			vy : 0,
-			width : 15,
-			height : 15,
-			hp: 100,
-			lives : hero.lives > 0 ? hero.lives : 3,
-			grenades: 3+ ((hero.grenades - 3)>0?hero.grenades-3:0),
-			platform: null
-		};
-	}else{	
-		hero = {
-			x : width/2,
-			y : 150,
-			vx : 0,
-			vy : 0,
-			width : 15,
-			height : 15,
-			hp: 100,
-			grenades: 3,
-			lives : 3,
-			platform: null
-		};
-	}
+	hero = {
+		x : width/2,
+		y : 150,
+		vx : 0,
+		vy : 0,
+		width : 15,
+		height : 15,
+		hp: 100,
+		grenades: 3,
+		lives : 3,
+		platform: null
+	};
 
 }
