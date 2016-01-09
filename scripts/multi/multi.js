@@ -75,7 +75,10 @@ function main()
 	peer.on('connection', function(connection) { 
 		console.log(connection);
 		connection.on('data', function(data) {
-				console.log(data);
+			console.log(data.x);
+			console.log(data.y);
+			opponent.x = data.x;
+			opponent.y = data.y;
 		});
 		
 		conn = connection;
@@ -105,15 +108,20 @@ function main()
 				console.log(peerID);
 				conn = peer.connect(peerID);
 				conn.on('data', function(data) {
-					console.log(data);
+					console.log(data.x);
+					console.log(data.y);
+					opponent.x = data.x;
+					opponent.y = data.y;
 				});
 				console.log(conn);
-				conn.send(myID);
 				inGame = true;
 			}
 			
 			if(conn != null){
-				conn.send(hero);
+				conn.send({
+					x: hero.x + translatedX,
+					y: hero.y
+				});
 			}
 			//calculating and displaying frame rate
 			fr ++; 
@@ -176,6 +184,14 @@ function load_elements()
 		grenades: 3,
 		lives : 3,
 		platform: null
+	};
+	
+	opponent = {
+		x : width/2,
+		y : 150,
+		width : 15,
+		height : 15,
+		hp: 100
 	};
 
 }

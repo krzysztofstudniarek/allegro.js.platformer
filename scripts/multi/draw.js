@@ -24,6 +24,9 @@ function draw(editor)
 		//draw hero
 		circlefill(canvas, hero.x+hero.width/2, hero.y+hero.height/2, hero.width/2, makecol(0,0,0));
 		
+		//draw opponent
+		circlefill(canvas, opponent.x+opponent.width/2 - translatedX, opponent.y+opponent.height/2, opponent.width/2, makecol(255,0,0));
+		
 		//draw heros hand
 		var d = distance(hero.x +hero.width/2, hero.y + hero.height/2, mouse_x, mouse_y);
 		circlefill(canvas, hero.x +hero.width/2 + 15*((mouse_x-hero.x-hero.width/2)/d), hero.y + hero.height/2 + 15*((mouse_y-hero.y- hero.height/2)/d), 4, makecol(0,0,0));
