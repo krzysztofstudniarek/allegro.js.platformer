@@ -58,6 +58,7 @@ var inGame = false;
 
 var peer;
 var peerID;
+var myID;
 
 var conn;
 
@@ -66,13 +67,28 @@ function main()
 	
 	peer = new Peer({key: '9q07d6b6taejnhfr'});
 	peer.on('open', function(id) {
-		console.log('My peer ID is: ' + id);
+		myID = id;
+		console.log('My peer ID is: ' + myID);
 	});
+	peer.on('connection', function(connection) { 
+		console.log("Connected");
+		conn = connection;
+		
+		conn.on('data', function(data) {
+			console.log('Received', data);
+		});
+		
+		inGame = true;
+		
+	});
+	
+	
+
 	//Initiation of all elements
 	font1 = load_font("./antilles.ttf");
     enable_debug('debug');
     allegro_init_all("game_canvas", width, height);
-	//load_elements();
+	load_elements();
 	load_sounds();
 	ready(function(){
         loop(function(){
@@ -80,25 +96,20 @@ function main()
             clear_to_color(canvas,makecol(255,255,255)); //clear display
             draw(); //drawing all scene elements (draw.js)
 			sound_control();
-			
-			if(peerID != 'undefined'){
+			if(peerID != null && !inGame){
+				console.log(peerID);
 				conn = peer.connect(peerID);
-				conn.on('open', function() {
-					  // Receive messages
-					  console.log("I'M CONNECTED");
-					  inGame = true;
-					});
-			}
-			
-			if(!lost && !won && !inGame){
-				peer.on('connection', function(connection) {
-					console.log("I'M CONNECTED");
-					conn = connection;
-					inGame = true;
+				conn.on('data', function(data) {
+					console.log('Received', data);
 				});
 				
+				conn.send('hello');
+				inGame = true;
 			}
 			
+			if(conn != null){
+				conn.send('hello '+myID);
+			}
 			//calculating and displaying frame rate
 			fr ++; 
 			if(time()-lastTime >= 1000){
