@@ -20,11 +20,13 @@ function achivements(){
 		addAchievement("10 kills");
 	}
 	
+	if(enemiesKilled >= 100 && !achivs.has("10 kills")){
+		addAchievement("100 kills");
+	}
+	
 	if(selfKill && !achivs.has("self kill")){
 		addAchievement("self kill");
 	}
-	
-	console.log(enemiesKilled);
 	
 	if(typeof(Storage) !== undefined) {
 		localStorage.setItem("killed_enemies", enemiesKilled);
