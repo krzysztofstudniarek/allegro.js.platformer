@@ -102,7 +102,7 @@ function draw(editor)
 		}
 		
 		
-	}else if(!won && !lost){
+	}else if(!won && !lost && !selectLvl){
 		
 		if(playPlay || playEditor){
 			play_sample(menuSound);
@@ -145,9 +145,10 @@ function draw(editor)
 			polygonfill(canvas, 4, [width/2-100, height/2-50, width/2+100, height/2-50, width/2+100, height/2+10, width/2-100, height/2+10], makecol(255,255,255));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 			if(mouse_b){
-				load_elements();
-				inGame = !inGame;
-				play_sample(backgroundSound,1.0,1.0,true);
+				//load_elements();
+				//inGame = !inGame;
+				selectLvl = true;
+				//play_sample(backgroundSound,1.0,1.0,true);
 			}
 		}else{
 			if(isPlaySelected){
@@ -199,5 +200,33 @@ function draw(editor)
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"You've got "+hero.lives+" lives left",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"press SPACE to keep on playing",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
+	}else if(selectLvl){
+		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
+		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
+		textout_centre(canvas,font1,"Select Level",SCREEN_W/2,100,30,makecol(0,0,0));
+		textout_centre(canvas,font1,lvl,SCREEN_W/2,SCREEN_H/2+50,100,makecol(0,0,0));
+		
+		if(mouse_x >=0 && mouse_x <= 210 && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
+			rectfill(canvas, 0, SCREEN_H/2-25, 250, 80, makecol(255,255,255));
+			trianglefill(canvas,210,SCREEN_H/2+13,235,SCREEN_H/2-12,235,SCREEN_H/2+38,makecol(0,0,0));
+			if(mouse_pressed && lvl > 0){
+				lvl --;
+			}
+		}else{
+			rectfill(canvas, 0, SCREEN_H/2-25, 250, 80, makecol(0,0,0));
+			trianglefill(canvas,210,SCREEN_H/2+13,235,SCREEN_H/2-12,235,SCREEN_H/2+38,makecol(255,255,255));
+		}
+		
+		if(mouse_x >=width-250 && mouse_x <= width && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
+			rectfill(canvas, width-250, SCREEN_H/2-25, 250, 80, makecol(255,255,255));
+			trianglefill(canvas,width-210,SCREEN_H/2+13,width-235,SCREEN_H/2-12,width-235,SCREEN_H/2+38,makecol(0,0,0));
+			if(mouse_pressed && lvl < maxLvl){
+				lvl ++;
+			}
+		}else{
+			rectfill(canvas, width-250, SCREEN_H/2-25, 250, 80, makecol(0,0,0));
+			trianglefill(canvas,width-210,SCREEN_H/2+13,width-235,SCREEN_H/2-12,width-235,SCREEN_H/2+38,makecol(255,255,255));
+		}
+		
 	}
 }

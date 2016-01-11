@@ -24,7 +24,7 @@ function events()
 				sound = false;
 			}
 			
-			if(lvl >= 4){
+			if(lvl >= maxLvl){
 				inGame = !inGame;
 				won = true;
 				hero.hp = 100;
@@ -34,6 +34,9 @@ function events()
 				lvl++;
 				load_elements();
 				sound = true;
+				if(typeof(Storage) !== undefined) {
+					localStorage.setItem("lvl", lvl);
+				}
 			}
 		}
 	}

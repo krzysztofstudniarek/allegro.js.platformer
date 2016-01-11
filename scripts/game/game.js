@@ -1,5 +1,6 @@
 //Display width and height
 var width = 640, height=480; 
+var maxLvl = 4;
 
 /*Set of platforms in the level.
 Example Platform Structure
@@ -55,6 +56,7 @@ var font1 = load_font("./antilles.ttf");
 var translatedX=250;
 
 var inGame = false;
+var selectLvl = false;
 
 function main()
 {
@@ -97,6 +99,9 @@ END_OF_MAIN();
 //function loads elements on start of the game.
 function load_elements()
 {
+	
+	lvl = localStorage.getItem("lvl")!= undefined?parseInt(localStorage.getItem("lvl")) : 0;
+	
 	grenades = new Set();
 	secrets = new Set();
 	
