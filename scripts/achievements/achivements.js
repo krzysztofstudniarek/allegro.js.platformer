@@ -1,6 +1,7 @@
 var elem;
 var achivs;
 var enemiesKilled;
+var selfKill = false;
 
 function achivements(){
 	if(inGame && !achivs.has("start")){
@@ -17,6 +18,10 @@ function achivements(){
 	
 	if(enemiesKilled >= 10 && !achivs.has("10 kills")){
 		addAchievement("10 kills");
+	}
+	
+	if(selfKill && !achivs.has("self kill")){
+		addAchievement("self kill");
 	}
 	
 	console.log(enemiesKilled);
