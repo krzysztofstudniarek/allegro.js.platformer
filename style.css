@@ -64,3 +64,27 @@ body {
 	font-family: antilles;
 	font-size: 25px;
 }
+
+#achv:hover{
+	margin : 15px;
+	background-color: #000;
+	text-align: center;
+	vertical-align: center;
+	line-height: 100px;  
+	color: #fff;
+	font-family: antilles;
+	font-size: 12px;
+}
+
+#achv span#title {
+display:inline;
+}
+#achv:hover span#title {
+display:none;
+}
+#achv span#description {
+display:none;
+}
+#achv:hover span#description {
+display:inline;
+}

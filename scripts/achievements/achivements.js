@@ -55,8 +55,18 @@ function initAchivements(){
 function addAchievement(value){
 		achivs.add(value);
 		var ach = document.createElement('div');
+		var spanTitle = document.createElement('span');
+		spanTitle.setAttribute("id", "title");
+		spanTitle.innerHTML = value;
+		
+		var spanDesc = document.createElement('span');
+		spanDesc.setAttribute("id", "description");
+		spanDesc.innerHTML = "Achievemet";
+		
+		ach.appendChild(spanTitle);
+		ach.appendChild(spanDesc);
+		
 		ach.setAttribute("id","achv");
-		ach.innerHTML = value;
 		elem.appendChild(ach);
 		if(typeof(Storage) !== undefined) {
 			localStorage.setItem("achievements", JSON.stringify(Array.from(achivs)));
