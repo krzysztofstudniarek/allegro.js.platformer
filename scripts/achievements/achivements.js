@@ -9,7 +9,7 @@ function achivements(){
 		achivement = {
 			name : "start",
 			description: "Achivement for starting the game"
-		};d
+		};
 		
 		if(!contains(achivement)){
 			addAchievement(achivement);
