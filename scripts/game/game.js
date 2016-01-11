@@ -23,6 +23,7 @@ var activeEnemies;
 var grenades;
 var secrets;
 
+var unlockedLvl = 0;
 var lvl = 0;
 var won = false;
 var lost = false;
@@ -67,6 +68,8 @@ function main()
 	//load_elements();
 	load_sounds();
 	initAchivements();
+	unlockedLvl = localStorage.getItem("lvl")!= undefined?parseInt(localStorage.getItem("lvl")) : 0;
+	lvl = unlockedLvl;
 	ready(function(){
         loop(function(){
 			wipe_log(); //clear log
@@ -98,10 +101,7 @@ END_OF_MAIN();
 
 //function loads elements on start of the game.
 function load_elements()
-{
-	
-	lvl = localStorage.getItem("lvl")!= undefined?parseInt(localStorage.getItem("lvl")) : 0;
-	
+{	
 	grenades = new Set();
 	secrets = new Set();
 	

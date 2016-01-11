@@ -203,7 +203,7 @@ function draw(editor)
 	}else if(selectLvl){
 		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
-		textout_centre(canvas,font1,"Select Level",SCREEN_W/2,100,30,makecol(0,0,0));
+		textout_centre(canvas,font1,"Select Level",SCREEN_W/2,150,45,makecol(0,0,0));
 		textout_centre(canvas,font1,lvl,SCREEN_W/2,SCREEN_H/2+50,100,makecol(0,0,0));
 		
 		if(mouse_x >=0 && mouse_x <= 210 && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
@@ -227,6 +227,21 @@ function draw(editor)
 			rectfill(canvas, width-250, SCREEN_H/2-25, 250, 80, makecol(0,0,0));
 			trianglefill(canvas,width-210,SCREEN_H/2+13,width-235,SCREEN_H/2-12,width-235,SCREEN_H/2+38,makecol(255,255,255));
 		}
+		
+		if(mouse_x >=width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2+100 && mouse_y <= height/2+160){
+			polygonfill(canvas, 4, [width/2-100, height/2+100, width/2+100, height/2+100, width/2+100, height/2+160, width/2-100, height/2+160], makecol(255,255,255));
+			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2+140,30,makecol(0,0,0));
+			if(mouse_pressed){
+				load_elements();
+				inGame = !inGame;
+				selectLvl = true;
+				play_sample(backgroundSound,1.0,1.0,true);
+			}
+		}else{
+			polygonfill(canvas, 4, [width/2-100, height/2+100, width/2+100, height/2+100, width/2+100, height/2+160, width/2-100, height/2+160], makecol(0,0,0));
+			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2+140,30,makecol(255,255,255));
+		}
+
 		
 	}
 }
