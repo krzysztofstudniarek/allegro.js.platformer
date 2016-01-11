@@ -218,7 +218,7 @@ function draw(editor)
 		}
 		
 		
-		if(mouse_x >=0 && mouse_x <= 210 && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
+		if(mouse_x >=0 && mouse_x <= 250 && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
 			if(!isLeftSelected){
 				leftPlay = true;
 				isLeftSelected = true;

@@ -9,9 +9,7 @@ function achivements(){
 		achivement = {
 			name : "start",
 			description: "Achivement for starting the game"
-		};
-		
-		console.log(!achivs.has(achivement));
+		};d
 		
 		if(!contains(achivement)){
 			addAchievement(achivement);
