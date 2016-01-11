@@ -68,8 +68,12 @@ function main()
 	//load_elements();
 	load_sounds();
 	initAchivements();
+	
 	unlockedLvl = localStorage.getItem("lvl")!= undefined?parseInt(localStorage.getItem("lvl")) : 0;
 	lvl = unlockedLvl;
+	
+	lock = load_bmp("sprites/lock.png");
+	
 	ready(function(){
         loop(function(){
 			wipe_log(); //clear log

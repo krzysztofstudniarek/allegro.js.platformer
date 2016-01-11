@@ -1,6 +1,7 @@
 //Fucntion for drawing elements on canvas
 var isPlaySelected = false;
 var isEditorSelected = false;
+var isLeftSelected = false, isRightSelected=false,leftPlay =false, rightPlay=false;
 var playPlay = false, playEditor = false;
 function draw(editor)
 {   
@@ -201,43 +202,90 @@ function draw(editor)
 		textout_centre(canvas,font1,"You've got "+hero.lives+" lives left",SCREEN_W/2,SCREEN_H/2-10,30,makecol(0,0,0));
 		textout_centre(canvas,font1,"press SPACE to keep on playing",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
 	}else if(selectLvl){
+		
+		if(leftPlay || rightPlay || playPlay){
+			play_sample(menuSound);
+		}
+		
 		rectfill(canvas, 0, 0, width, 40, makecol(0,0,0));
 		rectfill(canvas, 0, height-40, width, 40, makecol(0,0,0));
 		textout_centre(canvas,font1,"Select Level",SCREEN_W/2,150,45,makecol(0,0,0));
-		textout_centre(canvas,font1,lvl,SCREEN_W/2,SCREEN_H/2+50,100,makecol(0,0,0));
+		if(lvl <= unlockedLvl){
+			textout_centre(canvas,font1,lvl,SCREEN_W/2,SCREEN_H/2+50,100,makecol(0,0,0));
+		}else{
+			textout_centre(canvas,font1,lvl,SCREEN_W/2,SCREEN_H/2+50,100,makecol(125,125,125));
+			textout_centre(canvas,font1,"LOCKED",SCREEN_W/2,SCREEN_H/2+25,30,makecol(0,0,0));
+		}
+		
 		
 		if(mouse_x >=0 && mouse_x <= 210 && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
+			if(!isLeftSelected){
+				leftPlay = true;
+				isLeftSelected = true;
+			}else{
+				leftPlay = false;
+			}
 			rectfill(canvas, 0, SCREEN_H/2-25, 250, 80, makecol(255,255,255));
 			trianglefill(canvas,210,SCREEN_H/2+13,235,SCREEN_H/2-12,235,SCREEN_H/2+38,makecol(0,0,0));
 			if(mouse_pressed && lvl > 0){
 				lvl --;
 			}
 		}else{
+			if(isLeftSelected){
+				isLeftSelected = false;
+				leftPlay = true;
+			}else{
+				leftPlay = false;
+			}
 			rectfill(canvas, 0, SCREEN_H/2-25, 250, 80, makecol(0,0,0));
 			trianglefill(canvas,210,SCREEN_H/2+13,235,SCREEN_H/2-12,235,SCREEN_H/2+38,makecol(255,255,255));
 		}
 		
 		if(mouse_x >=width-250 && mouse_x <= width && mouse_y >= SCREEN_H/2-25 && mouse_y <= SCREEN_H/2+55){
+			if(!isRightSelected){
+				rightPlay = true;
+				isRightSelected = true;
+			}else{
+				rightPlay = false;
+			}
 			rectfill(canvas, width-250, SCREEN_H/2-25, 250, 80, makecol(255,255,255));
 			trianglefill(canvas,width-210,SCREEN_H/2+13,width-235,SCREEN_H/2-12,width-235,SCREEN_H/2+38,makecol(0,0,0));
 			if(mouse_pressed && lvl < maxLvl){
 				lvl ++;
 			}
 		}else{
+			if(isRightSelected){
+				isRightSelected = false;
+				rightPlay = true;
+			}else{
+				rightPlay = false;
+			}
 			rectfill(canvas, width-250, SCREEN_H/2-25, 250, 80, makecol(0,0,0));
 			trianglefill(canvas,width-210,SCREEN_H/2+13,width-235,SCREEN_H/2-12,width-235,SCREEN_H/2+38,makecol(255,255,255));
 		}
 		
 		if(mouse_x >=width/2-100 && mouse_x <= width/2+100 && mouse_y >= height/2+100 && mouse_y <= height/2+160){
+			if(!isPlaySelected){
+				playPlay = true;
+				isPlaySelected = true;
+			}else{
+				playPlay = false;
+			}
 			polygonfill(canvas, 4, [width/2-100, height/2+100, width/2+100, height/2+100, width/2+100, height/2+160, width/2-100, height/2+160], makecol(255,255,255));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2+140,30,makecol(0,0,0));
-			if(mouse_pressed){
+			if(mouse_pressed && lvl <= unlockedLvl){
 				load_elements();
 				inGame = !inGame;
 				selectLvl = true;
 				play_sample(backgroundSound,1.0,1.0,true);
 			}
 		}else{
+			if(isPlaySelected){
+				isPlaySelected = false;
+				playPlay = true;
+			}else{
+				playPlay = false;
+			}
 			polygonfill(canvas, 4, [width/2-100, height/2+100, width/2+100, height/2+100, width/2+100, height/2+160, width/2-100, height/2+160], makecol(0,0,0));
 			textout_centre(canvas,font1,"PLAY GAME",SCREEN_W/2,SCREEN_H/2+140,30,makecol(255,255,255));
 		}
