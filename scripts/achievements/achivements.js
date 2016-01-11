@@ -2,30 +2,77 @@ var elem;
 var achivs;
 var enemiesKilled;
 var selfKill = false;
+var achivement;
 
 function achivements(){
-	if(inGame && !achivs.has("start")){
-		addAchievement("start");
+	if(inGame){
+		achivement = {
+			name : "start",
+			description: "Achivement for starting the game"
+		};
+		
+		console.log(!achivs.has(achivement));
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		}
 	}
 	
-	if(hero != null && hero.platform != null && hero.platform.trap && lost && !achivs.has("it's a trap")){
-		addAchievement("it's a trap");
+	if(hero != null && hero.platform != null && hero.platform.trap && lost){
+		
+		achivement = {
+			name : "it's a trap",
+			description : "Achivement for dying in a trap"
+		}
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		}
+		
 	}
 	
-	if(enemiesKilled >= 5 && !achivs.has("5 kills")){
-		addAchievement("5 kills");
+	if(enemiesKilled >= 5){
+		achivement = {
+			name : "5 kills",
+			description : "Achivment for killing 5 enemies"
+		}
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		}
 	}
 	
-	if(enemiesKilled >= 10 && !achivs.has("10 kills")){
-		addAchievement("10 kills");
+	if(enemiesKilled >= 10){
+		achivement = {
+			name : "10 kills",
+			description : "Achivment for killing 10 enemies"
+		}
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		};
 	}
 	
-	if(enemiesKilled >= 100 && !achivs.has("10 kills")){
-		addAchievement("100 kills");
+	if(enemiesKilled >= 100){
+		achivement = {
+			name : "100 kills",
+			description : "Achivment for killing 100 enemies"
+		}
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		}
 	}
 	
 	if(selfKill && !achivs.has("self kill")){
-		addAchievement("self kill");
+		achivement = {
+			name : "self kill",
+			description : "Achivment for killing yourself"
+		}
+		
+		if(!contains(achivement)){
+			addAchievement(achivement);
+		}
 	}
 	
 	if(typeof(Storage) !== undefined) {
@@ -40,7 +87,7 @@ function initAchivements(){
 	enemiesKilled = 0;
 
 	if(typeof(Storage) !== undefined) {
-		var arr = JSON.parse(localStorage.getItem("achievements"));
+		var arr = JSON.parse(localStorage.getItem("achiv"));
 		if(arr != undefined){
 			for(var i = 0; i<arr.length; i++){
 				addAchievement(arr[i]);
@@ -57,11 +104,11 @@ function addAchievement(value){
 		var ach = document.createElement('div');
 		var spanTitle = document.createElement('span');
 		spanTitle.setAttribute("id", "title");
-		spanTitle.innerHTML = value;
+		spanTitle.innerHTML = value.name;
 		
 		var spanDesc = document.createElement('span');
 		spanDesc.setAttribute("id", "description");
-		spanDesc.innerHTML = "Achievemet";
+		spanDesc.innerHTML = value.description;
 		
 		ach.appendChild(spanTitle);
 		ach.appendChild(spanDesc);
@@ -69,6 +116,19 @@ function addAchievement(value){
 		ach.setAttribute("id","achv");
 		elem.appendChild(ach);
 		if(typeof(Storage) !== undefined) {
-			localStorage.setItem("achievements", JSON.stringify(Array.from(achivs)));
+			localStorage.setItem("achiv", JSON.stringify(Array.from(achivs)));
 		}
+}
+
+function contains(ach){
+	
+	var ret = false;
+	
+	achivs.forEach(function(value){
+			if(ach.name == value.name){
+				ret = true;
+			}
+		});
+		
+	return ret;
 }

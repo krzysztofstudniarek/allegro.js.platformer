@@ -66,13 +66,13 @@ body {
 }
 
 #achv:hover{
-	margin : 15px;
+	margin : 25px;
 	background-color: #000;
 	text-align: center;
 	vertical-align: center;
-	line-height: 100px;  
+	line-height: 25px;  
 	color: #fff;
-	font-family: antilles;
+	font-family: Monospace, Lucida Console, sans-serif;
 	font-size: 12px;
 }
 
